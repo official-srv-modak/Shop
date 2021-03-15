@@ -13,8 +13,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class SplashScreen extends AppCompatActivity {
 
     @Override
