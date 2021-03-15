@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("WrongConstant")
+    @SuppressLint({"WrongConstant"})
     public void getCard(JSONObject finalresumeData)
     {
         LinearLayout linearLayout1 = findViewById(R.id.linearLayout);
@@ -254,6 +254,24 @@ public class MainActivity extends AppCompatActivity {
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         desc.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+                    }
+
+                    TextView origin = view.findViewById(R.id.origin);
+                    origin.setText(origin.getText()+card.getString("origin_place"));
+
+                    String availableFlag = card.getString("available_flag");
+
+                    if(availableFlag.equalsIgnoreCase("out of stock"))
+                    {
+                        TextView stockInfo = view.findViewById(R.id.stock_info);
+                        stockInfo.setText("Out of stock");
+                        stockInfo.setTextColor(Color.RED);
+                    }
+                    else if(availableFlag.equalsIgnoreCase("available"))
+                    {
+                        TextView stockInfo = view.findViewById(R.id.stock_info);
+                        stockInfo.setText("In stock");
+                        stockInfo.setTextColor(Color.parseColor("#218525"));
                     }
 
                     linearLayout1.addView(view);   // Add the horizontal layout to the vertical linear layout

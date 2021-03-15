@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    >
+    tools:openDrawer="start">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar1"
@@ -19,7 +19,7 @@
         android:id="@+id/nav_bar"
         android:layout_width="wrap_content"
         android:background="@drawable/background_mobile"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:headerLayout="@layout/menu_header"
         app:menu="@menu/nav_drawer_menu"
         android:layout_gravity="start"/>
