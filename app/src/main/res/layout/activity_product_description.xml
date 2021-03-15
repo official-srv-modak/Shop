@@ -138,6 +138,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
+                                    android:textSize="22sp"
                                     android:gravity="center"
                                     android:maxHeight="26sp"
                                     android:minHeight="20sp"
@@ -174,28 +175,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="10dp"
+                                    android:textSize="18sp"
                                     android:textStyle="bold"
                                     android:layout_gravity="center"
                                     android:textColor="@color/black"
                                     android:text="" />
-
-                                <TextView
-                                    android:id="@+id/productDescriptionCardDescription"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="10dp"
-                                    android:layout_gravity="center"
-                                    android:textColor="@color/black"
-                                    android:text="About the product - \n\n" />
-
-                                <TextView
-                                    android:id="@+id/productDescriptionCardOrigin"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="10dp"
-                                    android:layout_gravity="center"
-                                    android:textColor="@color/black"
-                                    android:text="Shipping from - " />
 
                                 <TextView
                                     android:id="@+id/productDescriptionPrice"
@@ -203,6 +187,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="10dp"
                                     android:layout_gravity="center"
+                                    android:textSize="33sp"
                                     android:gravity="center"
                                     android:minHeight="35dp"
                                     android:maxHeight="45dp"
@@ -215,12 +200,33 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
-                                    android:paddingLeft="5dp"
+                                    android:paddingStart="5dp"
                                     android:layout_gravity="center"
                                     android:minHeight="15dp"
+                                    android:textSize="12sp"
                                     android:maxHeight="20dp"
                                     android:textColor="@color/black"
                                     android:text="Free delivery"/>
+
+                                <TextView
+                                    android:id="@+id/productDescriptionCardDescription"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:layout_gravity="center"
+                                    android:textSize="15sp"
+                                    android:textColor="@color/black"
+                                    android:text="About the product - " />
+
+                                <TextView
+                                    android:id="@+id/productDescriptionCardOrigin"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:textSize="12sp"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/black"
+                                    android:text="Shipping from - " />
 
                                 <TextView
                                     android:id="@+id/productDescriptionSellerName"
@@ -229,11 +235,45 @@
                                     android:layout_margin="5dp"
                                     android:paddingLeft="5dp"
                                     android:layout_gravity="center"
-                                    android:minHeight="25dp"
-                                    android:maxHeight="30dp"
-                                    android:textColor="@color/black"
-                                    android:text="Sold by - "/>
+                                    android:textSize="15sp"
+                                    android:minHeight="12sp"
+                                    android:maxHeight="25sp"
+                                    android:textColor="@color/black"/>
 
+                                <LinearLayout
+                                    android:id="@+id/productDescriptionLinearLayoutBtn"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <Button
+                                        android:id="@+id/productDescriptionBuyBtn"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_weight="1"
+                                        android:autoSizeMaxTextSize="12dp"
+                                        android:autoSizeMinTextSize="1dp"
+                                        android:autoSizeStepGranularity="2sp"
+                                        android:autoSizeTextType="uniform"
+                                        android:gravity="center"
+                                        android:text="BUY" />
+
+                                    <Button
+                                        android:id="@+id/productDescriptionSaveBtn"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_weight="1"
+                                        android:autoSizeMaxTextSize="12dp"
+                                        android:autoSizeMinTextSize="1dp"
+                                        android:autoSizeStepGranularity="2sp"
+                                        android:autoSizeTextType="uniform"
+                                        android:gravity="center"
+                                        android:text="SAVE" />
+                                </LinearLayout>
                             </LinearLayout>
                         </ScrollView>
 
