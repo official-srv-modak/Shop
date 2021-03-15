@@ -24,9 +24,19 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Animation slideIn = AnimationUtils.loadAnimation(this, R.anim.slide_from_rt_to_lt);
+        Animation slideInRt = AnimationUtils.loadAnimation(this, R.anim.slide_from_rt_to_lt);
+        Animation textAnim = AnimationUtils.loadAnimation(this, R.anim.text_animation);
+        Animation imageAnim = AnimationUtils.loadAnimation(this, R.anim.image_animation);
+        Animation slideInUp = AnimationUtils.loadAnimation(this, R.anim.slide_from_down_to_up);
+
+
+        ImageView logoNameSplashText = findViewById(R.id.logoSplashScreenText), logoNameSplashImage = findViewById(R.id.logoSplashScreen), madeInIndiaLogo = findViewById(R.id.made_in_india_logo);
+        logoNameSplashText.setAnimation(textAnim);
+        logoNameSplashImage.setAnimation(imageAnim);
+        madeInIndiaLogo.setAnimation(slideInUp);
+
         TextView tagline = findViewById(R.id.tagline);
-        tagline.setAnimation(slideIn);
+        tagline.setAnimation(slideInRt);
 
         ConstraintLayout animationScreen = findViewById(R.id.animation_screen);
         animationScreen.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +55,6 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 5000);
+        }, 3500);
     }
 }
