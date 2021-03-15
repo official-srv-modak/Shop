@@ -36,16 +36,6 @@ public class SplashScreen extends AppCompatActivity {
         TextView tagline = findViewById(R.id.tagline);
         tagline.setAnimation(slideInRt);
 
-        ConstraintLayout animationScreen = findViewById(R.id.animation_screen);
-        animationScreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
