@@ -52,7 +52,7 @@ import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String domain = "192.168.0.4:8081/";
+    public static String domain = "13.232.4.2:8081/";
     public static String sslProtocol = "http://";
     public static String productUrl = sslProtocol+domain+"home/product";
     public static String imageUrl = sslProtocol+domain+"ShopManager/image?id=";
@@ -180,7 +180,11 @@ public class MainActivity extends AppCompatActivity {
                     String id = (String)images.get(0);  // only the first image
                     String album_art_path = imageUrl + id;
                     if(!album_art_path.isEmpty())
-                        Glide.with(MainActivity.this).load(album_art_path).into(imageView);
+                    {
+                        Glide.with(MainActivity.this)
+                                .load(album_art_path)
+                                .into(imageView);
+                    }
 
                     // Text price
                     TextView price = view.findViewById(R.id.price);
@@ -246,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
 
             JSONObject postReq = null;
             try {
+                Log.e("URL", urls[1]);
                 postReq = new JSONObject(urls[1]);
                 JSONObject respObject = MiscOperations.getDataFromServerPOST(productUrl, postReq);
                 String temp = "1"; ///// remove

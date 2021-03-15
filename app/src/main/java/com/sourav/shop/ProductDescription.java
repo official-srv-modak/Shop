@@ -77,7 +77,11 @@ public class ProductDescription extends AppCompatActivity {
                             String id = (String)images.get(0);  // only the first image
                             String imagePath = imageUrl + id;
                             if(!imagePath.isEmpty())
-                                Glide.with(ProductDescription.this).load(imagePath).into(imageView);
+                            {
+                                Glide.with(ProductDescription.this)
+                                        .load(imagePath)
+                                        .into(imageView);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
