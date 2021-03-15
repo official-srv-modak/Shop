@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
         View headerView = navigationView.getHeaderView(0);
         ImageView loginProfile = headerView.findViewById(R.id.dp);
-        Glide.with(MainActivity.this).load(new File("drawable-v24/profile_pic.png"));
+        Glide.with(MainActivity.this).load(R.drawable.kisaraa);
 
 
         ImageView menuInHeader = headerView.findViewById(R.id.menu_header);

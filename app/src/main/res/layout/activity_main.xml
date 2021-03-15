@@ -66,6 +66,18 @@
                     app:srcCompat="@drawable/menu_black" />
 
                 <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:layout_weight="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/kisaraa" />
+
+                <ImageView
                     android:id="@+id/search_btn"
                     android:layout_width="20dp"
                     android:layout_height="match_parent"
