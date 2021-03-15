@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         View headerView = navigationView.getHeaderView(0);
-        ImageView loginProfile = headerView.findViewById(R.id.dp);
-        Glide.with(MainActivity.this).load(R.drawable.kisaraa);
+        /*ImageView loginProfile = headerView.findViewById(R.id.dp);
+        Glide.with(MainActivity.this).load(R.drawable.kisaraa);*/
 
 
         ImageView menuInHeader = headerView.findViewById(R.id.menu_header);
@@ -146,69 +146,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static Map<String, Object> toMap(JSONObject jsonobj)  throws JSONException
-    {
-        Map<String, Object> map = new HashMap<String, Object>();
-        Iterator<String> keys = jsonobj.keys();
-        while(keys.hasNext()) {
-            String key = keys.next();
-            Object value = jsonobj.get(key);
-            if (value instanceof JSONArray) {
-                value = toList((JSONArray) value);
-            } else if (value instanceof JSONObject) {
-                value = toMap((JSONObject) value);
-            }
-            map.put(key, value);
-        }   return map;
-    }
 
-    public static List<Object> toList(JSONArray array) throws JSONException
-    {
-        List<Object> list = new ArrayList<Object>();
-        for(int i = 0; i < array.length(); i++) {
-            Object value = array.get(i);
-            if (value instanceof JSONArray) {
-                value = toList((JSONArray) value);
-            }
-            else if (value instanceof JSONObject) {
-                value = toMap((JSONObject) value);
-            }
-            list.add(value);
-        }   return list;
-    }
-
-    public static JSONObject getDataFromServerPOST(String URL, JSONObject postReqestJSON)
-    {
-        String output = "";
-        Log.e("URL", URL);
-        try{
-            java.net.URL url = new URL(URL);
-
-            byte[] postDataBytes = postReqestJSON.toString().getBytes("UTF-8");
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-            conn.setDoOutput(true);
-            conn.getOutputStream().write(postDataBytes);
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                {
-                    output += inputLine;
-                }
-            }
-            in.close();
-            JSONObject jsonObj = new JSONObject(output);
-            return jsonObj;
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            Log.e("URL", URL);
-            return null;
-        }
-    }
 
     @SuppressLint({"WrongConstant"})
     public void getCard(JSONObject finalresumeData)
@@ -235,14 +173,14 @@ public class MainActivity extends AppCompatActivity {
                     // Images
                     ImageView imageView = (ImageView) view.findViewById(R.id.image);
                     JSONArray images = new JSONArray(card.getString("images"));
-                    String id = (String)images.get(0);
+                    String id = (String)images.get(0);  // only the first image
                     String album_art_path = imageUrl + id;
                     if(!album_art_path.isEmpty())
                         Glide.with(MainActivity.this).load(album_art_path).into(imageView);
 
                     // Text price
                     TextView price = view.findViewById(R.id.price);
-                    price.setText("₹ "+card.getString("price"));
+                    price.setText(price.getText()+card.getString("price"));
 
                     // Text title
                     TextView title = view.findViewById(R.id.productName);
@@ -260,20 +198,17 @@ public class MainActivity extends AppCompatActivity {
                     origin.setText(origin.getText()+card.getString("origin_place"));
 
                     String availableFlag = card.getString("available_flag");
+                    TextView stockInfo = view.findViewById(R.id.stock_info);
+                    MiscOperations.addStockFlagColorTextView(availableFlag, stockInfo);
 
-                    if(availableFlag.equalsIgnoreCase("out of stock"))
-                    {
-                        TextView stockInfo = view.findViewById(R.id.stock_info);
-                        stockInfo.setText("Out of stock");
-                        stockInfo.setTextColor(Color.RED);
-                    }
-                    else if(availableFlag.equalsIgnoreCase("available"))
-                    {
-                        TextView stockInfo = view.findViewById(R.id.stock_info);
-                        stockInfo.setText("In stock");
-                        stockInfo.setTextColor(Color.parseColor("#218525"));
-                    }
-
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent productDescritpionActivity = new Intent(MainActivity.this, ProductDescription.class);
+                            productDescritpionActivity.putExtra("productDetails", card.toString());
+                            startActivity(productDescritpionActivity);
+                        }
+                    });
                     linearLayout1.addView(view);   // Add the horizontal layout to the vertical linear layout
                 }
 
@@ -283,46 +218,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static JSONObject getDataFromServerGET(String URL)
-    {
-        String output = "";
-        Log.e("URL", URL);
-        try{
-            java.net.URL url = new URL(URL);
-            StringBuilder postData = new StringBuilder();
-            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-            conn.setDoOutput(true);
-            conn.getOutputStream().write(postDataBytes);
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                {
-                    output += inputLine;
-                }
-            }
-            in.close();
-            JSONObject jsonObj = new JSONObject(output);
-            return jsonObj;
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            Log.e("URL", URL);
-            return null;
-        }
-    }
-
     private class LoadCard extends AsyncTask<String, Void, Integer> {
         protected Integer doInBackground(String... urls) {
 
             JSONObject postReq = null;
             try {
                 postReq = new JSONObject(urls[1]);
-                JSONObject respObject = getDataFromServerPOST(productUrl, postReq);
+                JSONObject respObject = MiscOperations.getDataFromServerPOST(productUrl, postReq);
                 String temp = "1"; ///// remove
                 runOnUiThread(new Runnable() {
                     @Override
@@ -347,7 +249,6 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.setIndeterminate(false);
                 progressDialog.setCancelable(true);
                 progressDialog.show();
-
 
         }
 
