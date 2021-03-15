@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         LoadCard ld = new LoadCard();
         ld.execute(productUrl, pidObj.toString());
 
+        //App bar codes
         ImageView menu = findViewById(R.id.menu_btn);
         DrawerLayout drawerLayout = findViewById(R.id.drawerlayout);
         menu.setOnClickListener(new View.OnClickListener() {
