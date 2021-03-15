@@ -33,11 +33,25 @@
                     android:layout_weight="1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.069"
+                    app:layout_constraintHorizontal_bias="0.071"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.034"
+                    app:layout_constraintVertical_bias="0.116"
                     app:srcCompat="@drawable/back" />
+
+                <ImageView
+                    android:id="@+id/made_in_india_logo_header"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginVertical="20dp"
+                    android:layout_weight="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.954"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:srcCompat="@drawable/made_in_india" />
 
                 <ImageView
                     android:id="@+id/logo_header"
