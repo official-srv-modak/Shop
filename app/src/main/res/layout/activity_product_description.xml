@@ -67,7 +67,7 @@
                     app:srcCompat="@drawable/menu_black" />
 
                 <ImageView
-                    android:id="@+id/logo"
+                    android:id="@+id/logoSplashScreen"
                     android:layout_width="45dp"
                     android:layout_height="match_parent"
                     android:paddingTop="5dp"

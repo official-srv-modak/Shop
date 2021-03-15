@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
         JSONArray pidArray = new JSONArray();
         pidArray.put("all");
         TextView heading = findViewById(R.id.heading);

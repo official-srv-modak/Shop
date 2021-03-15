@@ -40,6 +40,20 @@
                     app:srcCompat="@drawable/back" />
 
                 <ImageView
+                    android:id="@+id/logo_header"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginVertical="20dp"
+                    android:layout_weight="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.271"
+                    app:srcCompat="@drawable/kisaraa" />
+
+                <ImageView
                     android:id="@+id/dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -41,11 +41,9 @@
 
                     <ImageView
                         android:id="@+id/image"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:maxWidth="140dp"
-                        android:minWidth="120dp"
                         tools:srcCompat="@tools:sample/avatars" />
 
                     <TextView
@@ -108,7 +106,7 @@
                         android:autoSizeMinTextSize="12dp"
                         android:autoSizeStepGranularity="2sp"
                         android:autoSizeTextType="uniform"
-                        android:text="Origins - "
+                        android:text="Origin - "
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
