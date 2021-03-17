@@ -5,7 +5,7 @@
     android:id="@+id/animation_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_mobile"
+    android:background="@drawable/background_text2"
     tools:context=".SplashScreen">
 
 
@@ -13,6 +13,7 @@
         android:id="@+id/tagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10sp"
         android:text="Made with culture... Made in INDIA"
         android:textColor="#000000"
         android:textStyle="bold|italic"
@@ -20,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoSplashScreen"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/made_in_india_logo"
@@ -53,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_hybrid" />
+        app:srcCompat="@drawable/logo_pro_2" />
 
 
 
