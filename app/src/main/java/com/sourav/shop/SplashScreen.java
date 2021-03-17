@@ -23,6 +23,7 @@ public class SplashScreen extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Animation slideInRt = AnimationUtils.loadAnimation(this, R.anim.slide_from_rt_to_lt);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_widget);
         Animation textAnim = AnimationUtils.loadAnimation(this, R.anim.text_animation);
         Animation imageAnim = AnimationUtils.loadAnimation(this, R.anim.image_animation);
         Animation slideInUp = AnimationUtils.loadAnimation(this, R.anim.slide_from_down_to_up);
@@ -34,7 +35,7 @@ public class SplashScreen extends AppCompatActivity {
         madeInIndiaLogo.setAnimation(slideInUp);
 
         TextView tagline = findViewById(R.id.tagline);
-        tagline.setAnimation(slideInRt);
+        tagline.setAnimation(fadeIn);
 
         new Handler().postDelayed(new Runnable() {
             @Override
