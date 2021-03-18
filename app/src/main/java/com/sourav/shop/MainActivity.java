@@ -35,11 +35,14 @@ import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String domain = "13.232.4.2:8081/";
+    public static String awsdomain = "13.232.4.2:8081/";
+    public static String domain = "192.168.0.4:8081/";
     public static String sslProtocol = "http://";
     public static String productUrl = sslProtocol+domain+"home/product";
     public static String imageUrl = sslProtocol+domain+"ShopManager/image?id=";
-
+    public static String loginUrl = sslProtocol+domain+"account/login";
+    static String username = "GUEST";
+    static JSONObject userInfo = null;
 
     @SuppressLint("CheckResult")
     @Override
@@ -49,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+        try {
+            userInfo = new JSONObject(getIntent().getStringExtra("user_data"));
+            userInfo = userInfo.getJSONObject("user_info");
+            username = userInfo.getString("first_name")+" "+userInfo.getString("last_name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         JSONArray pidArray = new JSONArray();
         pidArray.put("all");
@@ -62,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         }
         LoadCard ld = new LoadCard();
         ld.execute(productUrl, pidObj.toString());
+
 
         //App bar codes
         ImageView menu = findViewById(R.id.menu_btn);
@@ -107,10 +119,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // set values in hamburger menu
         View headerView = navigationView.getHeaderView(0);
         /*ImageView loginProfile = headerView.findViewById(R.id.dp);
         Glide.with(MainActivity.this).load(R.drawable.kisaraa);*/
 
+        if(!username.equals("GUEST")) {
+            TextView navUsername = (TextView) headerView.findViewById(R.id.profileName);
+            navUsername.setText(username);
+        }
 
         ImageView menuInHeader = headerView.findViewById(R.id.menu_header);
         menuInHeader.setOnClickListener(new View.OnClickListener() {
@@ -257,10 +274,10 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-                progressDialog.setMessage("Welcome, loading products");
-                progressDialog.setIndeterminate(false);
-                progressDialog.setCancelable(true);
-                progressDialog.show();
+            progressDialog.setMessage("Welcome, "+username+" loading products");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setCancelable(true);
+            progressDialog.show();
 
         }
 
