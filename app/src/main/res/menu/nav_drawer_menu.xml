@@ -19,8 +19,11 @@
             android:title="Contact Us"
             android:icon="@android:drawable/sym_action_email"
             android:checked="false"/>
-
-
+        <item
+            android:id="@+id/logout"
+            android:title="Log out"
+            android:icon="@drawable/logout"
+            android:checked="false"/>
 
     </group>
 
