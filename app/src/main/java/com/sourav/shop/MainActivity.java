@@ -1,12 +1,14 @@
 package com.sourav.shop;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -96,13 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
 
                     case R.id.logout: {
-                        File file = new File(SplashScreen.sessionIdFilePath);
-                        if(file.exists())
-                            file.delete();
-                        Intent intent = new Intent(MainActivity.this, LoginPage.class);
-                        intent.putExtra("session_id_file_path", SplashScreen.sessionIdFilePath);
-                        startActivity(intent);
-                        finish();
+                        logout("Are you sure?");
                         break;
                     }
 
@@ -133,6 +129,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void logout(String Message)
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(Message);
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                File file = new File(SplashScreen.sessionIdFilePath);
+                if(file.exists())
+                    file.delete();
+                Intent intent = new Intent(MainActivity.this, LoginPage.class);
+                intent.putExtra("session_id_file_path", SplashScreen.sessionIdFilePath);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialogBuilder.show();
     }
 
     @Override
