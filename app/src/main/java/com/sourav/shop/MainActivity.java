@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,8 @@ import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 public class MainActivity extends AppCompatActivity {
 
     public static String awsdomain = "13.232.4.2:8081/";
-    public static String domain = "192.168.0.4:8081/";
+    //public static String domain = "192.168.0.4:8081/";
+    public static String domain = awsdomain;
     public static String sslProtocol = "http://";
     public static String productUrl = sslProtocol+domain+"home/product";
     public static String imageUrl = sslProtocol+domain+"ShopManager/image?id=";
@@ -93,25 +95,17 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
 
-                    /*case R.id.profiles: {
-                        Intent intent = new Intent(MainActivity.this, Profiles.class);
-                        intent.putExtra("startFlag", "1");
+                    case R.id.logout: {
+                        File file = new File(SplashScreen.sessionIdFilePath);
+                        if(file.exists())
+                            file.delete();
+                        Intent intent = new Intent(MainActivity.this, LoginPage.class);
+                        intent.putExtra("session_id_file_path", SplashScreen.sessionIdFilePath);
                         startActivity(intent);
                         finish();
                         break;
                     }
-                    case R.id.resetProfile: {
-                        resetProfile("Do you really want to reset all you watching history?");
-                        break;
-                    }
-                    case R.id.contactUs: {
-                        showContactUs("Developer - Sourav Modak\nContact Number - +91 9500166574\nE-Mail - official.srv.modak@gmail.com");
-                        break;
-                    }
-                    case R.id.resetIp: {
-                        showServerDialogNoExit("Do you really want to reset IP? It can crash app if false IP is set");
-                        break;
-                    }*/
+
                 }
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);
                 drawer.closeDrawer(GravityCompat.START);
