@@ -29,6 +29,7 @@ import static com.sourav.shop.MainActivity.imageUrl;
 
 public class ProductDescription extends AppCompatActivity {
 
+    static String username = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,14 @@ public class ProductDescription extends AppCompatActivity {
 
         LoadCard ld = new LoadCard();
         ld.execute();
+
+        //App bar codes
+
+        NavigationView navigationView = findViewById(R.id.productDescriptionNav_bar);
+        ImageView menu = findViewById(R.id.productDescriptionMenu_btn);
+        DrawerLayout drawerLayout = findViewById(R.id.productDescriptionDrawerlayout);
+        MiscOperations.initialiseHeaderMenu(navigationView, menu, drawerLayout, ProductDescription.this);
+
     }
 
     private class LoadCard extends AsyncTask<String, Void, Integer> {
@@ -115,66 +124,6 @@ public class ProductDescription extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            //App bar codes
-            ImageView menu = findViewById(R.id.productDescriptionMenu_btn);
-            DrawerLayout drawerLayout = findViewById(R.id.drawerlayout);
-            menu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    drawerLayout.openDrawer(GravityCompat.START);
-                }
-            });
-
-            NavigationView navigationView = findViewById(R.id.productDescriptionNav_bar);
-            navigationView.bringToFront();
-            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-
-                    /*case R.id.profiles: {
-                        Intent intent = new Intent(MainActivity.this, Profiles.class);
-                        intent.putExtra("startFlag", "1");
-                        startActivity(intent);
-                        finish();
-                        break;
-                    }
-                    case R.id.resetProfile: {
-                        resetProfile("Do you really want to reset all you watching history?");
-                        break;
-                    }
-                    case R.id.contactUs: {
-                        showContactUs("Developer - Sourav Modak\nContact Number - +91 9500166574\nE-Mail - official.srv.modak@gmail.com");
-                        break;
-                    }
-                    case R.id.resetIp: {
-                        showServerDialogNoExit("Do you really want to reset IP? It can crash app if false IP is set");
-                        break;
-                    }*/
-                    }
-                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);
-                    drawer.closeDrawer(GravityCompat.START);
-                    return true;
-                }
-            });
-
-            View headerView = navigationView.getHeaderView(0);
-        /*ImageView loginProfile = headerView.findViewById(R.id.dp);
-        Glide.with(MainActivity.this).load(R.drawable.kisaraa);*/
-
-
-            ImageView menuInHeader = headerView.findViewById(R.id.menu_header);
-            menuInHeader.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("WrongConstant")
-                @Override
-                public void onClick(View v) {
-                    if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                    }
-                }
-            });
 
             return null;
         }

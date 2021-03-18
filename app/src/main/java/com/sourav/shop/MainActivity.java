@@ -59,8 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             userInfo = new JSONObject(getIntent().getStringExtra("user_data"));
-            userInfo = userInfo.getJSONObject("user_info");
-            username = userInfo.getString("first_name")+" "+userInfo.getString("last_name");
+            String sessionId = userInfo.get("session_id").toString();
+            JSONObject temp = userInfo.getJSONObject("user_info");
+            username = temp.getString("first_name")+" "+temp.getString("last_name");
+            CheckSession checkSession = new CheckSession();
+            checkSession.execute(sessionId);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -82,80 +86,11 @@ public class MainActivity extends AppCompatActivity {
         //App bar codes
         ImageView menu = findViewById(R.id.menu_btn);
         DrawerLayout drawerLayout = findViewById(R.id.drawerlayout);
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-
         NavigationView navigationView = findViewById(R.id.nav_bar);
-        navigationView.bringToFront();
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-
-                    case R.id.logout: {
-                        logout("Are you sure?");
-                        break;
-                    }
-
-                }
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-            }
-        });
-
-        // set values in hamburger menu
-        View headerView = navigationView.getHeaderView(0);
-        /*ImageView loginProfile = headerView.findViewById(R.id.dp);
-        Glide.with(MainActivity.this).load(R.drawable.kisaraa);*/
-
-        if(!username.equals("GUEST")) {
-            TextView navUsername = (TextView) headerView.findViewById(R.id.profileName);
-            navUsername.setText(username);
-        }
-
-        ImageView menuInHeader = headerView.findViewById(R.id.menu_header);
-        menuInHeader.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongConstant")
-            @Override
-            public void onClick(View v) {
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                }
-            }
-        });
+        MiscOperations.initialiseHeaderMenu(navigationView, menu, drawerLayout, MainActivity.this);
     }
 
-    public void logout(String Message)
-    {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(Message);
-        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                File file = new File(SplashScreen.sessionIdFilePath);
-                if(file.exists())
-                    file.delete();
-                Intent intent = new Intent(MainActivity.this, LoginPage.class);
-                intent.putExtra("session_id_file_path", SplashScreen.sessionIdFilePath);
-                startActivity(intent);
-                finish();
 
-            }
-        });
-        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        alertDialogBuilder.show();
-    }
 
     @Override
     public void onBackPressed() {
@@ -304,5 +239,78 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private class CheckSession extends AsyncTask<String, Void, Integer> {
+        JSONObject userInfo = new JSONObject(), output = new JSONObject();
+        protected Integer doInBackground(String... data) {
+
+            //login
+
+            try {
+                userInfo.put("session_id", data[0]);
+                output = MiscOperations.getDataFromServerPOST(MainActivity.loginUrl, userInfo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog.setMessage("Welcome, "+username+" loading products");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setCancelable(true);
+            progressDialog.show();
+
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            progressDialog.dismiss();
+            try {
+                if(output.length() == 0)
+                {
+                    sessionExpired("Your session has expired. You might have logged in from another device");
+                }
+                else
+                {
+                    output = output.getJSONObject("user_info");
+                    username = userInfo.getString("first_name")+" "+userInfo.getString("last_name");
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public void sessionExpired(String Message)
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(Message);
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                File file = new File(SplashScreen.sessionIdFilePath);
+                if(file.exists())
+                    file.delete();
+                Intent intent = new Intent(MainActivity.this, LoginPage.class);
+                intent.putExtra("session_id_file_path", SplashScreen.sessionIdFilePath);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        alertDialogBuilder.show();
     }
 }

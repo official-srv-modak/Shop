@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:background="@drawable/background_mobile"
         android:layout_height="match_parent"
-        app:headerLayout="@layout/fragment_menu_header"
+        app:headerLayout="@layout/menu_header"
         app:menu="@menu/nav_drawer_menu"
         android:layout_gravity="start"/>
 

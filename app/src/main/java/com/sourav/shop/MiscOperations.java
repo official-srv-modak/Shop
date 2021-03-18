@@ -1,12 +1,25 @@
 package com.sourav.shop;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +41,80 @@ import java.util.Map;
 public class MiscOperations {
 
 
+    public static void logout(String Message, Activity activity)
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
+        alertDialogBuilder.setMessage(Message);
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                File file = new File(SplashScreen.sessionIdFilePath);
+                if(file.exists())
+                    file.delete();
+                Intent intent = new Intent(activity, LoginPage.class);
+                intent.putExtra("session_id_file_path", SplashScreen.sessionIdFilePath);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                activity.finish();
+                activity.startActivity(intent);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+        alertDialogBuilder.show();
+    }
+
+    public static void initialiseHeaderMenu(NavigationView navigationView, ImageView menu, DrawerLayout drawerLayout, Activity activity)
+    {
+        String username = MainActivity.username;
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+
+                    case R.id.logout: {
+                        logout("Are you sure?", activity);
+                        break;
+                    }
+
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+
+        // set values in hamburger menu
+        View headerView = navigationView.getHeaderView(0);
+        /*ImageView loginProfile = headerView.findViewById(R.id.dp);
+        Glide.with(MainActivity.this).load(R.drawable.kisaraa);*/
+
+        if(!username.equals("GUEST")) {
+            TextView navUsername = (TextView) headerView.findViewById(R.id.profileName);
+            navUsername.setText(username);
+        }
+
+        ImageView menuInHeader = headerView.findViewById(R.id.menu_header);
+        menuInHeader.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
+            @Override
+            public void onClick(View v) {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                }
+            }
+        });
+    }
     public static Map<String, Object> toMap(JSONObject jsonobj)  throws JSONException
     {
         Map<String, Object> map = new HashMap<String, Object>();
