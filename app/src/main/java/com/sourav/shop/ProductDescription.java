@@ -46,6 +46,9 @@ public class ProductDescription extends AppCompatActivity {
         DrawerLayout drawerLayout = findViewById(R.id.productDescriptionDrawerlayout);
         MiscOperations.initialiseHeaderMenu(navigationView, menu, drawerLayout, ProductDescription.this);
 
+        ImageView searchBtn = findViewById(R.id.search_btn);
+        MiscOperations.initialiseSearch(searchBtn, ProductDescription.this);
+
     }
 
     private class LoadCard extends AsyncTask<String, Void, Integer> {

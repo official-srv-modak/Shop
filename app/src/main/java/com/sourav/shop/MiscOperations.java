@@ -41,6 +41,16 @@ import java.util.Map;
 public class MiscOperations {
 
 
+    public static void initialiseSearch(ImageView searchBtn, Activity activity)
+    {
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchIntent = new Intent(activity, SearchActivity.class);
+                activity.startActivity(searchIntent);
+            }
+        });
+    }
     public static void logout(String Message, Activity activity)
     {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);

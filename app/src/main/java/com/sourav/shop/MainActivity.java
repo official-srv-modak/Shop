@@ -40,11 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static String awsdomain = "13.232.4.2:8081/";
     //public static String domain = "192.168.0.4:8081/";
-    public static String domain = awsdomain;
+    public static String domain = "192.168.0.4:8081/";
     public static String sslProtocol = "http://";
     public static String productUrl = sslProtocol+domain+"home/product";
     public static String imageUrl = sslProtocol+domain+"ShopManager/image?id=";
     public static String loginUrl = sslProtocol+domain+"account/login";
+    public static String searchUrl = sslProtocol+domain+"search/query";
     static String username = "GUEST";
     static JSONObject userInfo = null;
 
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawerLayout = findViewById(R.id.drawerlayout);
         NavigationView navigationView = findViewById(R.id.nav_bar);
         MiscOperations.initialiseHeaderMenu(navigationView, menu, drawerLayout, MainActivity.this);
+
+        ImageView searchBtn = findViewById(R.id.search_btn);
+        MiscOperations.initialiseSearch(searchBtn, MainActivity.this);
     }
 
 
