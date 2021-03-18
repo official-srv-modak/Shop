@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -60,6 +62,11 @@ public class LoginPage extends AppCompatActivity {
         TextView username = findViewById(R.id.usernameLogin), password = findViewById(R.id.passwordLogin);
         Button loginBtn = findViewById(R.id.loginBtn);
 
+
+        TextView textView = (TextView) findViewById(R.id.createAcc);
+        SpannableString content = new SpannableString(textView.getText());
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setText(content);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
