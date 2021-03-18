@@ -91,7 +91,13 @@ public class MainActivity extends AppCompatActivity {
         MiscOperations.initialiseHeaderMenu(navigationView, menu, drawerLayout, MainActivity.this);
 
         ImageView searchBtn = findViewById(R.id.search_btn);
-        MiscOperations.initialiseSearch(searchBtn, MainActivity.this);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(searchIntent);
+            }
+        });
     }
 
 
