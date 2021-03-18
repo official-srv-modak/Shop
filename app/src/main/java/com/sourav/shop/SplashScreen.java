@@ -1,6 +1,7 @@
 package com.sourav.shop;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
@@ -26,6 +27,7 @@ import java.io.ObjectOutputStream;
 public class SplashScreen extends AppCompatActivity {
 
     static String sessionIdFilePath =  "";
+
     static String getUserData(String sessionIdFilePath)
     {
         String output = null;
@@ -47,6 +49,7 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_splash_screen);
         getSupportActionBar().hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
