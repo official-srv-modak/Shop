@@ -119,6 +119,7 @@ public class SearchActivity extends AppCompatActivity {
                         }*/
 
                         LinearLayout linearLayout1 = SearchActivity.this.findViewById(R.id.linearLayout1);
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         linearLayout1.removeAllViews();
 
                         try {
@@ -155,7 +156,16 @@ public class SearchActivity extends AppCompatActivity {
                                     }
                                 });
 
-
+                                if(i != show.length()-1)
+                                {
+                                    lp.setMargins(40, 40, 40, 40);
+                                    view.setLayoutParams(lp);
+                                }
+                                else
+                                {
+                                    lp.setMargins(40, 40, 40, 0);
+                                    view.setLayoutParams(lp);
+                                }
                                 linearLayout1.addView(view);
                             }
 
