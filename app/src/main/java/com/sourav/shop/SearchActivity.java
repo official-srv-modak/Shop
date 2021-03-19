@@ -61,6 +61,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 String query = searchTextBox.getText().toString();
+                TextView queryTitle = findViewById(R.id.queryTitle);
+                queryTitle.setText("Loading...");
                 LinearLayout linearLayout1 = SearchActivity.this.findViewById(R.id.linearLayout1);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
