@@ -56,7 +56,6 @@ public class SearchActivity extends AppCompatActivity {
         EditText searchTextBox = findViewById(R.id.searchTextBox);
         searchTextBox.requestFocus();
         searchTextBox.addTextChangedListener(new TextWatcher() {
-            String queryOld = "";
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
