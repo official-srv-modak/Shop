@@ -32,6 +32,8 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private static String username = "";
+    int numberOfCardLoaded = 0;
+    boolean cardLoaded = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +56,12 @@ public class SearchActivity extends AppCompatActivity {
         EditText searchTextBox = findViewById(R.id.searchTextBox);
         searchTextBox.requestFocus();
         searchTextBox.addTextChangedListener(new TextWatcher() {
+            String queryOld = "";
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+                String query = searchTextBox.getText().toString();
+                LinearLayout linearLayout1 = SearchActivity.this.findViewById(R.id.linearLayout1);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
                     if(!searchTextBox.getText().toString().isEmpty())
@@ -66,25 +71,24 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        LinearLayout linearLayout1 = SearchActivity.this.findViewById(R.id.linearLayout1);
                         linearLayout1.removeAllViews();
                     }
-
                 }
 
             }
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // TODO Auto-generated method stub
+
             }
             @Override
             public void afterTextChanged(Editable s) {
                 // TODO Auto-generated method stub
+                TextView queryTitle = findViewById(R.id.queryTitle);
                 if(searchTextBox.getText().toString().isEmpty())
-                {
-                    TextView queryTitle = findViewById(R.id.queryTitle);
                     queryTitle.setText("Enter something");
-                }
+
+
             }
         });
     }
@@ -108,15 +112,11 @@ public class SearchActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     // Stuff that updates the UI
-                    TextView queryTitle = findViewById(R.id.queryTitle);
 
                     if(finalResult != null) {   //json object of search is not null
-                        /*resultV.setText("");
-                        try {
-                            resultV.setText(finalResult.getString("cards"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
+
+                        TextView queryTitle = findViewById(R.id.queryTitle);
+                        queryTitle.setText("Results of \""+query+"\"");
 
                         LinearLayout linearLayout1 = SearchActivity.this.findViewById(R.id.linearLayout1);
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -124,10 +124,10 @@ public class SearchActivity extends AppCompatActivity {
 
                         try {
                             JSONArray show = finalResult.getJSONArray("cards");
+                            numberOfCardLoaded = show.length();
                             List<Integer> idList = new ArrayList<Integer>();
                             for(int i = 0; i < show.length(); i++)
                             {
-                                queryTitle.setText("Results of \""+query+"\"");
                                 JSONObject card = show.getJSONObject(i);
                                 View view = LayoutInflater.from(SearchActivity.this).inflate(R.layout.search_result_elements, null);
                                 @SuppressLint({"NewApi", "LocalSuppress"}) int uniqueId = View.generateViewId();
@@ -168,6 +168,14 @@ public class SearchActivity extends AppCompatActivity {
                                 }
                                 linearLayout1.addView(view);
                             }
+                            if(show.length() == 0 && !query.isEmpty())
+                            {
+                                queryTitle.setText("Sorry, no results");
+                            }
+                            else if(show.length() == 0)
+                            {
+                                queryTitle.setText("Enter something");
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -176,8 +184,10 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        // show nothing found
+                        TextView queryTitle = findViewById(R.id.queryTitle);
+                        queryTitle.setText("Sorry, no results");
                     }
+                    cardLoaded = true;
                 }
             });
 
