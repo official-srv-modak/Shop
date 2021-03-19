@@ -41,10 +41,6 @@ import java.util.Map;
 public class MiscOperations {
 
 
-    public static void initialiseSearch(ImageView searchBtn, Activity activity)
-    {
-
-    }
     public static void logout(String Message, Activity activity)
     {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);

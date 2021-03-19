@@ -79,10 +79,11 @@
 
                 <ImageView
                     android:id="@+id/search_btn"
-                    android:layout_width="20dp"
+                    android:layout_width="45dp"
                     android:layout_height="match_parent"
-                    android:layout_marginVertical="15dp"
+                    android:layout_marginVertical="5dp"
                     android:layout_weight="1"
+                    android:padding="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.956"

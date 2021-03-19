@@ -3,6 +3,7 @@ package com.sourav.shop;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static String awsdomain = "13.232.4.2:8081/";
     //public static String domain = "192.168.0.4:8081/";
-    public static String domain = "192.168.0.4:8081/";
+    public static String domain = awsdomain;
     public static String sslProtocol = "http://";
     public static String productUrl = sslProtocol+domain+"home/product";
     public static String imageUrl = sslProtocol+domain+"ShopManager/image?id=";
@@ -54,9 +55,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         getSupportActionBar().hide();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        overridePendingTransition(0, R.anim.fade_out);
 
         try {
             userInfo = new JSONObject(getIntent().getStringExtra("user_data"));

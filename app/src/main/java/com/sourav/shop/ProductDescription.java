@@ -2,11 +2,13 @@ package com.sourav.shop;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -35,6 +37,8 @@ public class ProductDescription extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_description);
         getSupportActionBar().hide();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         LoadCard ld = new LoadCard();
         ld.execute();
@@ -46,8 +50,14 @@ public class ProductDescription extends AppCompatActivity {
         DrawerLayout drawerLayout = findViewById(R.id.productDescriptionDrawerlayout);
         MiscOperations.initialiseHeaderMenu(navigationView, menu, drawerLayout, ProductDescription.this);
 
-        ImageView searchBtn = findViewById(R.id.search_btn);
-        MiscOperations.initialiseSearch(searchBtn, ProductDescription.this);
+        ImageView searchBtn = findViewById(R.id.productDescriptionSearch_btn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchIntent = new Intent(ProductDescription.this, SearchActivity.class);
+                startActivity(searchIntent);
+            }
+        });
 
     }
 
