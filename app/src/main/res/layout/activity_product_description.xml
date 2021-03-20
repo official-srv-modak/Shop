@@ -234,14 +234,32 @@
                                     android:id="@+id/productDescriptionSellerName"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginVertical="10dp"
-                                    android:layout_marginHorizontal="5dp"
-                                    android:paddingStart="5dp"
                                     android:layout_gravity="center"
-                                    android:textSize="15sp"
-                                    android:minHeight="12sp"
+                                    android:layout_margin="10dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:layout_marginVertical="10dp"
                                     android:maxHeight="25sp"
-                                    android:textColor="@color/black"/>
+                                    android:minHeight="12sp"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/productDetails"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="Product Details : "
+                                    android:textAlignment="viewStart"
+                                    android:textColor="#000000"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+
+                                <TableLayout
+                                    android:id="@+id/productDescriptionTable"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="10dp"/>
 
                                 <LinearLayout
                                     android:id="@+id/productDescriptionLinearLayoutBtn"

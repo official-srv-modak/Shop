@@ -14,9 +14,12 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,9 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import static com.sourav.shop.MainActivity.imageUrl;
 
@@ -77,6 +83,11 @@ public class ProductDescription extends AppCompatActivity {
                 ImageView image = findViewById(R.id.productDescriptionImage);
                 String availableFlag = productData.getString("available_flag");
 
+                Iterator<String> ar = productData.keys();
+                ArrayList<String> keys = new ArrayList<String>();
+                while (ar.hasNext())
+                    keys.add(ar.next());
+
                 if(productData.has("name"))
                     title.setText(productData.getString("name"));
                 if(productData.has("available_flag"))
@@ -91,8 +102,6 @@ public class ProductDescription extends AppCompatActivity {
                     deliveryFee.setText(deliveryFee.getText()+productData.getString("delivery_fee"));
                 if(productData.has("seller_name"))
                     seller.setText(Html.fromHtml("<b>Sold by - </b>"+productData.getString("seller_name")));
-
-
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -130,6 +139,26 @@ public class ProductDescription extends AppCompatActivity {
                             });
                         }
 
+                        TableLayout productDescTable = findViewById(R.id.productDescriptionTable);
+                        TableLayout.LayoutParams tbl = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
+                        tbl.setMargins(40,40,40,40);
+                       // productDescTable.setLayoutParams(tbl);
+                        for(String key : keys)
+                        {
+                            try
+                            {
+                                TableRow row = new TableRow(ProductDescription.this);
+                                TextView keyView = new TextView(ProductDescription.this), valueView = new TextView(ProductDescription.this);
+                                keyView.setText(key);
+                                row.setLayoutParams(tbl);
+                                valueView.setText(productData.getString(key));
+                                row.addView(keyView);
+                                row.addView(valueView);
+                                productDescTable.addView(row);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 });
 
