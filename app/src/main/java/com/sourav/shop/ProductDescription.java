@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,18 @@ import static com.sourav.shop.MainActivity.imageUrl;
 public class ProductDescription extends AppCompatActivity {
 
     static String username = "";
+
+    public static ArrayList<String> formatKeys(ArrayList<String> keys)
+    {
+        for(int i = 0; i<keys.size(); i++)
+        {
+            String val = keys.get(i);
+             val = val.replace("_", " ");
+            keys.set(i, val);
+        }
+
+        return keys;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +96,6 @@ public class ProductDescription extends AppCompatActivity {
                 ImageView image = findViewById(R.id.productDescriptionImage);
                 String availableFlag = productData.getString("available_flag");
 
-                Iterator<String> ar = productData.keys();
-                ArrayList<String> keys = new ArrayList<String>();
-                while (ar.hasNext())
-                    keys.add(ar.next());
 
                 if(productData.has("name"))
                     title.setText(productData.getString("name"));
@@ -102,6 +111,7 @@ public class ProductDescription extends AppCompatActivity {
                     deliveryFee.setText(deliveryFee.getText()+productData.getString("delivery_fee"));
                 if(productData.has("seller_name"))
                     seller.setText(Html.fromHtml("<b>Sold by - </b>"+productData.getString("seller_name")));
+
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -139,25 +149,46 @@ public class ProductDescription extends AppCompatActivity {
                             });
                         }
 
-                        TableLayout productDescTable = findViewById(R.id.productDescriptionTable);
-                        TableLayout.LayoutParams tbl = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
-                        tbl.setMargins(40,40,40,40);
-                       // productDescTable.setLayoutParams(tbl);
-                        for(String key : keys)
-                        {
-                            try
+                        try {
+                            JSONObject productData1 = new JSONObject(productData.toString());
+                            Iterator<String> ar = productData1.keys();
+
+                            ArrayList<String> keys = new ArrayList<String>();
+                            while(ar.hasNext())
+                                keys.add(ar.next());
+
+                            ArrayList<String> keys1 = new ArrayList<String>(keys);
+                            keys = new ArrayList<String>(formatKeys(keys));
+
+                            TableLayout prodDescLayout = findViewById(R.id.productDescriptionTable);
+                            for(int j = 0; j<keys1.size(); j++)
                             {
-                                TableRow row = new TableRow(ProductDescription.this);
-                                TextView keyView = new TextView(ProductDescription.this), valueView = new TextView(ProductDescription.this);
-                                keyView.setText(key);
-                                row.setLayoutParams(tbl);
-                                valueView.setText(productData.getString(key));
-                                row.addView(keyView);
-                                row.addView(valueView);
-                                productDescTable.addView(row);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                String key = keys1.get(j);
+
+                                // filter
+                                if(!key.startsWith("image") && !key.equalsIgnoreCase("quantity") && !key.equalsIgnoreCase("description") && !key.equalsIgnoreCase("available_flag") && !key.equalsIgnoreCase("pid") && !key.equalsIgnoreCase("sid") && !key.equalsIgnoreCase("price"))
+                                {
+                                    try
+                                    {
+                                        TableRow row = (TableRow) LayoutInflater.from(ProductDescription.this).inflate(R.layout.row_layout, null);
+                                        TextView keyView = row.findViewById(R.id.key), valueView = row.findViewById(R.id.value);
+                                        keyView.setText(keys.get(j).substring(0, 1).toUpperCase() + keys.get(j).substring(1));
+                                        String val = productData1.getString(key);
+                                        if (!val.isEmpty())
+                                        {
+                                            val = val.substring(0, 1).toUpperCase() + val.substring(1);
+                                            valueView.setText(val);
+                                        }
+
+                                        prodDescLayout.addView(row);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
