@@ -45,17 +45,8 @@ public class SplashScreen extends AppCompatActivity {
 
         return output;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        setContentView(R.layout.activity_splash_screen);
-        getSupportActionBar().hide();
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        sessionIdFilePath = getApplicationContext().getFilesDir().getAbsolutePath() + File.separator + "session_id.json";
-
-
+    public void animationStart()
+    {
         Animation slideInRt = AnimationUtils.loadAnimation(this, R.anim.slide_from_rt_to_lt);
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_widget);
         Animation textAnim = AnimationUtils.loadAnimation(this, R.anim.text_animation);
@@ -70,41 +61,79 @@ public class SplashScreen extends AppCompatActivity {
 
         TextView tagline = findViewById(R.id.tagline);
         tagline.setAnimation(fadeIn);
+    }
+
+    public void noAnimationStart()
+    {
+        ImageView logoNameSplashText = findViewById(R.id.logoSplashScreenText);
+        logoNameSplashText.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        setContentView(R.layout.activity_splash_screen);
+        getSupportActionBar().hide();
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        sessionIdFilePath = getApplicationContext().getFilesDir().getAbsolutePath() + File.separator + "session_id.json";
 
         JSONObject userData = null;
 
         String sessionId = null;
         String temp = getUserData(sessionIdFilePath);
-        if(temp != null)
-        {
+        if (temp != null) {
             try {
                 userData = new JSONObject(temp);
                 sessionId = userData.get("session_id").toString();
+                String finalSessionId = sessionId;
+                JSONObject finalUserData = userData;
+                if (finalSessionId != null)
+                {
+                    noAnimationStart();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                            intent.putExtra("user_data", finalUserData.toString());
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    }, 1000);
+
+                }
+                else
+                {
+                    animationStart();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(SplashScreen.this, LoginPage.class);
+                            intent.putExtra("session_id_file_path", sessionIdFilePath);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }, 5000);
+                }
             } catch (JSONException e) {
                 e.getSuppressed();
             }
         }
-        String finalSessionId = sessionId;
-        JSONObject finalUserData = userData;
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(finalSessionId != null)
-                {
-                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                    intent.putExtra("user_data", finalUserData.toString());
-                    startActivity(intent);
-                    finish();
-                }
-                else
-                {
+        else
+        {
+            animationStart();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
                     Intent intent = new Intent(SplashScreen.this, LoginPage.class);
                     intent.putExtra("session_id_file_path", sessionIdFilePath);
                     startActivity(intent);
                     finish();
                 }
+            }, 5000);
+        }
 
-            }
-        }, 5000);
     }
 }
