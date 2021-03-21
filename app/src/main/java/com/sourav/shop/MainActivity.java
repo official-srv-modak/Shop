@@ -269,23 +269,17 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
-        ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog.setMessage("Welcome, "+username+" loading products");
-            progressDialog.setIndeterminate(false);
-            progressDialog.setCancelable(true);
-            progressDialog.show();
 
         }
 
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            progressDialog.dismiss();
             try {
                 if(output.length() == 0)
                 {
