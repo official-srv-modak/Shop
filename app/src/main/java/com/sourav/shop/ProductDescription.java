@@ -1,9 +1,7 @@
 package com.sourav.shop;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
@@ -13,9 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,7 +82,7 @@ public class ProductDescription extends AppCompatActivity {
 
             try {
                 JSONObject productData = new JSONObject(getIntent().getStringExtra("productDetails"));
-                TextView title = findViewById(R.id.productDescriptionTitle),
+                TextView title = findViewById(R.id.orderDetailsTitle),
                         stockDetails = findViewById(R.id.productDescriptionCardStockDetails),
                         description = findViewById(R.id.productDescriptionCardDescription),
                         shippingFrom = findViewById(R.id.productDescriptionCardOrigin),

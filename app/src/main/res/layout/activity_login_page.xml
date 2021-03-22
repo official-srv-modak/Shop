@@ -46,7 +46,7 @@
                         app:srcCompat="@drawable/kisaraa" />
 
                     <TextView
-                        android:id="@+id/productDescriptionTitle"
+                        android:id="@+id/orderDetailsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
