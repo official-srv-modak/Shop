@@ -5,8 +5,8 @@
     <group
         android:id="@+id/gp1">
         <item
-            android:id="@+id/cart"
-            android:title="Cart"
+            android:id="@+id/bag"
+            android:title="Bag"
             android:icon="@drawable/kisaraa"
             android:checked="false"/>
         <item
