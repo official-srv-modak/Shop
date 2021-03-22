@@ -158,14 +158,6 @@ public class MainActivity extends AppCompatActivity {
                     TextView title = view.findViewById(R.id.productName);
                     title.setText(card.getString("name"));
 
-                    // Text description
-                    /*TextView desc = view.findViewById(R.id.description);
-                    desc.setText(card.getString("description"));
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        desc.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-                    }*/
-
                     TextView origin = view.findViewById(R.id.origin);
                     origin.setText(origin.getText()+card.getString("origin_place"));
 
@@ -181,24 +173,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(productDescritpionActivity);
                         }
                     });
-                    /*Button buyBtn = view.findViewById(R.id.buyBtn), saveBtn = view.findViewById(R.id.saveBtn);
-                    LinearLayout lBtn= view.findViewById(R.id.linearLayoutBtn);
-                    if(availableFlag.equalsIgnoreCase("out of stock"))
-                    {
-                        saveBtn.setVisibility(View.INVISIBLE);
-                        saveBtn.setEnabled(false);
-                        buyBtn.setText("Notify me");
-                        lBtn.removeView(saveBtn);
-                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                        lp.setMargins(40,0,40,0);
-                        buyBtn.setLayoutParams(lp);
-                        buyBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText(MainActivity.this, "Will be notified", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }*/
+
 
                     linearLayout1.addView(view);   // Add the horizontal layout to the vertical linear layout
                 }
