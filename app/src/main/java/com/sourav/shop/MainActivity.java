@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
                     JSONObject card = prod.getJSONObject(i); // Take into of each card
                     // We have inflated it
-                    View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.product_card, null);
+                    View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.new_product_card, null);
                     @SuppressLint({"NewApi", "LocalSuppress"}) int uniqueId = View.generateViewId();
                     view.setId(uniqueId);
                     idList.add(uniqueId);
@@ -159,12 +159,12 @@ public class MainActivity extends AppCompatActivity {
                     title.setText(card.getString("name"));
 
                     // Text description
-                    TextView desc = view.findViewById(R.id.description);
+                    /*TextView desc = view.findViewById(R.id.description);
                     desc.setText(card.getString("description"));
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         desc.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-                    }
+                    }*/
 
                     TextView origin = view.findViewById(R.id.origin);
                     origin.setText(origin.getText()+card.getString("origin_place"));
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(productDescritpionActivity);
                         }
                     });
-                    Button buyBtn = view.findViewById(R.id.buyBtn), saveBtn = view.findViewById(R.id.saveBtn);
+                    /*Button buyBtn = view.findViewById(R.id.buyBtn), saveBtn = view.findViewById(R.id.saveBtn);
                     LinearLayout lBtn= view.findViewById(R.id.linearLayoutBtn);
                     if(availableFlag.equalsIgnoreCase("out of stock"))
                     {
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "Will be notified", Toast.LENGTH_SHORT).show();
                             }
                         });
-                    }
+                    }*/
 
                     linearLayout1.addView(view);   // Add the horizontal layout to the vertical linear layout
                 }
