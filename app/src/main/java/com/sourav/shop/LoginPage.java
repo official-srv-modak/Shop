@@ -1,8 +1,10 @@
 package com.sourav.shop;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -131,6 +133,19 @@ public class LoginPage extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+            else
+            {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginPage.this);
+                alertDialogBuilder.setMessage("Invalid username or password, or account doesn't exist");
+                alertDialogBuilder.setCancelable(false);
+                alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialogBuilder.show();
             }
             progressDialog.dismiss();
 

@@ -157,14 +157,10 @@
 
                                 <ImageView
                                     android:id="@+id/productDescriptionImage"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_margin="10dp"
-                                    android:maxWidth="300dp"
-                                    android:maxHeight="300dp"
-                                    android:minWidth="250dp"
-                                    android:minHeight="250dp"
+                                    android:layout_marginHorizontal="25dp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintHorizontal_bias="0.498"
@@ -172,6 +168,7 @@
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintVertical_bias="0.276"
                                     tools:srcCompat="@tools:sample/avatars" />
+
 
                                 <TextView
                                     android:id="@+id/productDescriptionCardStockDetails"
@@ -266,6 +263,7 @@
                                     android:id="@+id/productDescriptionLinearLayoutBtn"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginVertical="10dp"
                                     android:orientation="horizontal">
 
                                     <Button
