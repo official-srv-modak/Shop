@@ -13,10 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shop"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OrderDetails"/>
+        <activity android:name=".OrderDetails"
+            android:launchMode = "singleTask"/>
         <activity
             android:name=".SearchActivity"
             android:screenOrientation="portrait"
+            android:launchMode = "singleTask"
             android:windowSoftInputMode="stateVisible|adjustPan"/>
         <activity android:name=".LoginPage"
             android:launchMode = "singleTask" />
@@ -32,10 +34,12 @@
         </activity>
         <activity
             android:name=".ProductDescription"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTask"/>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTask"/>
     </application>
 
 </manifest>
