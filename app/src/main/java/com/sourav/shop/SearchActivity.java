@@ -31,6 +31,7 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private static String username = "";
+    JSONObject userInfo;
     int numberOfCardLoaded = 0;
     boolean cardLoaded = false;
     @Override
@@ -43,6 +44,11 @@ public class SearchActivity extends AppCompatActivity {
         ImageView backBtn = findViewById(R.id.backBtn);
 
         username = getIntent().getStringExtra("username");
+        try {
+            userInfo = new JSONObject(getIntent().getStringExtra("user_data"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +105,8 @@ public class SearchActivity extends AppCompatActivity {
             JSONObject result = null, resumeData = null, postData = new JSONObject();
             String query = urls[1];
             try {
+                postData.put("session_id", userInfo.get("session_id"));
+                postData.put("parameter", "product");
                 postData.put("query", query);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -152,6 +160,7 @@ public class SearchActivity extends AppCompatActivity {
                                     public void onClick(View v) {
                                         Intent intent = new Intent(SearchActivity.this, ProductDescription.class);
                                         intent.putExtra("productDetails", card.toString());
+                                        intent.putExtra("user_data", userInfo.toString());
                                         SearchActivity.this.startActivityForResult(intent, 1);
                                     }
                                 });

@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/productDescriptionCard"
+            android:id="@+id/Card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
@@ -110,9 +110,9 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:gravity="center"
-                        android:textSize="18sp"
+                        android:textSize="12sp"
                         android:layout_marginBottom="20dp"
-                        android:text="Create account" />
+                        android:text="New user? Create account" />
 
                 </LinearLayout>
             </ScrollView>

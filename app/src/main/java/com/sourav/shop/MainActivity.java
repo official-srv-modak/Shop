@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                searchIntent.putExtra("user_data", userInfo.toString());
                 startActivity(searchIntent);
             }
         });
@@ -170,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             Intent productDescritpionActivity = new Intent(MainActivity.this, ProductDescription.class);
                             productDescritpionActivity.putExtra("productDetails", card.toString());
+                            productDescritpionActivity.putExtra("user_data", userInfo.toString());
                             startActivity(productDescritpionActivity);
                         }
                     });

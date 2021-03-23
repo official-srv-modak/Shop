@@ -34,7 +34,7 @@ import static com.sourav.shop.MainActivity.imageUrl;
 
 public class ProductDescription extends AppCompatActivity {
 
-    static String username = "";
+    static JSONObject userInfo;
 
     public static ArrayList<String> formatKeys(ArrayList<String> keys)
     {
@@ -65,11 +65,18 @@ public class ProductDescription extends AppCompatActivity {
         DrawerLayout drawerLayout = findViewById(R.id.productDescriptionDrawerlayout);
         MiscOperations.initialiseHeaderMenu(navigationView, menu, drawerLayout, ProductDescription.this);
 
+        try {
+            userInfo = new JSONObject(getIntent().getStringExtra("user_data"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         ImageView searchBtn = findViewById(R.id.productDescriptionSearch_btn);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent searchIntent = new Intent(ProductDescription.this, SearchActivity.class);
+                searchIntent.putExtra("user_data", userInfo.toString());
                 startActivity(searchIntent);
             }
         });
