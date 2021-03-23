@@ -70,10 +70,10 @@ public class SearchActivity extends AppCompatActivity {
                 LinearLayout linearLayout1 = SearchActivity.this.findViewById(R.id.linearLayout1);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-                    if(!searchTextBox.getText().toString().isEmpty())
+                    if(!query.isEmpty())
                     {
                         LoadCard ld = new LoadCard();
-                        ld.execute(MainActivity.searchUrl, searchTextBox.getText().toString());
+                        ld.execute(MainActivity.searchUrl, query);
                     }
                     else
                     {
