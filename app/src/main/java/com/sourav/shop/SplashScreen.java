@@ -77,7 +77,6 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sessionIdFilePath = getApplicationContext().getFilesDir().getAbsolutePath() + File.separator + "session_id.json";
-
         JSONObject userData = null;
 
         String sessionId = null;

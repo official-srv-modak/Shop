@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -121,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
     public void getCard(JSONObject finalresumeData)
     {
         LinearLayout linearLayout1 = findViewById(R.id.linearLayout);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_card);
+        linearLayout1.setAnimation(fadeIn);
         linearLayout1.removeAllViews();
         List<Integer> idList = new ArrayList<Integer>();
         try {
@@ -224,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
+
                 progressDialog.dismiss();
 
         }

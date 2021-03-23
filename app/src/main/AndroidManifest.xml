@@ -13,14 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shop"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OrderDetails"></activity>
+        <activity android:name=".OrderDetails"/>
         <activity
             android:name=".SearchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan"></activity>
-        <activity android:name=".LoginPage" />
+            android:windowSoftInputMode="stateVisible|adjustPan"/>
+        <activity android:name=".LoginPage"
+            android:launchMode = "singleTask" />
         <activity
             android:name=".SplashScreen"
+            android:launchMode = "singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
