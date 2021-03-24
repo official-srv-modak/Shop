@@ -35,6 +35,7 @@ import static com.sourav.shop.MainActivity.imageUrl;
 public class ProductDescription extends AppCompatActivity {
 
     static JSONObject userInfo;
+    static JSONObject productData;
 
     public static ArrayList<String> formatKeys(ArrayList<String> keys)
     {
@@ -81,6 +82,17 @@ public class ProductDescription extends AppCompatActivity {
             }
         });
 
+        Button buyBtn = findViewById(R.id.productDescriptionBuyBtn);
+        buyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent orderIntent = new Intent(ProductDescription.this, OrderDetails.class);
+                orderIntent.putExtra("user_data", userInfo.toString());
+                orderIntent.putExtra("product_details", productData.toString());
+                startActivity(orderIntent);
+            }
+        });
+
     }
 
     private class LoadCard extends AsyncTask<String, Void, Integer> {
@@ -88,7 +100,7 @@ public class ProductDescription extends AppCompatActivity {
         protected Integer doInBackground(String... urls) {
 
             try {
-                JSONObject productData = new JSONObject(getIntent().getStringExtra("productDetails"));
+                productData = new JSONObject(getIntent().getStringExtra("productDetails"));
                 TextView title = findViewById(R.id.orderDetailsTitle),
                         stockDetails = findViewById(R.id.productDescriptionCardStockDetails),
                         description = findViewById(R.id.productDescriptionCardDescription),

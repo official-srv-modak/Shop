@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class CheckSession extends AsyncTask<String, Void, Integer> {
+    class CheckSession extends AsyncTask<String, Void, Integer> {
         JSONObject userInfo = new JSONObject(), output = new JSONObject();
         protected Integer doInBackground(String... data) {
 
