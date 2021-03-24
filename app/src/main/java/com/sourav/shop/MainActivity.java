@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     //public static String domain = "192.168.0.4:8081/";
     public static String domain = awsdomain;
     public static String sslProtocol = "http://";
-    public static String productUrl = sslProtocol+domain+"home/product";
+    public static String productUrl = sslProtocol+domain+"product/fetchproduct";
     public static String imageUrl = sslProtocol+domain+"ShopManager/image?id=";
     public static String loginUrl = sslProtocol+domain+"account/login";
     public static String searchUrl = sslProtocol+domain+"search/query";
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         heading.setText("Our collections");
         JSONObject pidObj = new JSONObject();
         try {
+            pidObj.put("session_id", userInfo.get("session_id").toString());
             pidObj.put("pid", pidArray);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -263,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             try {
+
                 if(output.length() == 0)
                 {
                     sessionExpired("Your session has expired. You might have logged in from another device");

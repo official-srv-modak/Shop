@@ -170,13 +170,15 @@ public class MiscOperations {
             }
             in.close();
             JSONObject jsonObj = new JSONObject(output);
+            if(jsonObj == null)
+                jsonObj = new JSONObject();
             return jsonObj;
         }
         catch(Exception e)
         {
             e.printStackTrace();
             Log.e("URL", URL);
-            return null;
+            return new JSONObject();
         }
     }
     public static JSONObject getDataFromServerGET(String URL)
@@ -202,13 +204,15 @@ public class MiscOperations {
             }
             in.close();
             JSONObject jsonObj = new JSONObject(output);
+            if(jsonObj == null)
+                jsonObj = new JSONObject();
             return jsonObj;
         }
         catch(Exception e)
         {
             e.printStackTrace();
             Log.e("URL", URL);
-            return null;
+            return new JSONObject();
         }
     }
 
