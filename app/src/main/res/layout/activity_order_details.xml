@@ -130,6 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -519,7 +520,7 @@
                                     android:text="PLACE ORDER" />
 
                                 <Button
-                                    android:id="@+id/saveBtn"
+                                    android:id="@+id/orderDetailsCancelBtn"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
