@@ -41,7 +41,7 @@ import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String awsdomain = "13.232.4.2:8081/";
+    public static String awsdomain = "www.kisara.in:8081/";
     //public static String domain = "192.168.0.4:8081/";
     public static String domain = awsdomain;
     public static String sslProtocol = "http://";
