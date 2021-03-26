@@ -112,26 +112,26 @@ public class ProductDescription extends AppCompatActivity {
                 String availableFlag = productData.getString("available_flag");
 
 
-                if(productData.has("name"))
-                    title.setText(productData.getString("name"));
-                if(productData.has("available_flag"))
-                    MiscOperations.addStockFlagColorTextView(availableFlag, stockDetails);
-                if(productData.has("description"))
-                    description.setText(Html.fromHtml("<b>"+description.getText()+"</b><br><br>"+productData.getString("description")));
-                if(productData.has("origin_place") && productData.has("country_of_origin"))
-                    shippingFrom.setText(Html.fromHtml("<b>"+shippingFrom.getText()+"</b>"+productData.getString("origin_place")+", "+productData.getString("country_of_origin")));
-                if(productData.has("price"))
-                    price.setText(price.getText()+productData.getString("price"));
-                if(productData.has("delivery_fee"))
-                    deliveryFee.setText(deliveryFee.getText()+productData.getString("delivery_fee"));
-                if(productData.has("seller_name"))
-                    seller.setText(Html.fromHtml("<b>Sold by - </b>"+productData.getString("seller_name")));
-
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            if(productData.has("name"))
+                                title.setText(productData.getString("name"));
+                            if(productData.has("available_flag"))
+                                MiscOperations.addStockFlagColorTextView(availableFlag, stockDetails);
+                            if(productData.has("description"))
+                                description.setText(Html.fromHtml("<b>"+description.getText()+"</b><br><br>"+productData.getString("description")));
+                            if(productData.has("origin_place") && productData.has("country_of_origin"))
+                                shippingFrom.setText(Html.fromHtml("<b>"+shippingFrom.getText()+"</b>"+productData.getString("origin_place")+", "+productData.getString("country_of_origin")));
+                            if(productData.has("price"))
+                                price.setText(price.getText()+productData.getString("price"));
+                            if(productData.has("delivery_fee"))
+                                deliveryFee.setText(deliveryFee.getText()+productData.getString("delivery_fee"));
+                            if(productData.has("seller_name"))
+                                seller.setText(Html.fromHtml("<b>Sold by - </b>"+productData.getString("seller_name")));
+
+
                             ImageView imageView = (ImageView) findViewById(R.id.productDescriptionImage);
                             JSONArray images = null;
                             images = new JSONArray(productData.getString("images"));
@@ -181,7 +181,7 @@ public class ProductDescription extends AppCompatActivity {
                                 String key = keys1.get(j);
 
                                 // filter
-                                if(!key.startsWith("image") && !key.equalsIgnoreCase("quantity") && !key.equalsIgnoreCase("description") && !key.equalsIgnoreCase("available_flag") && !key.equalsIgnoreCase("pid") && !key.equalsIgnoreCase("sid") && !key.equalsIgnoreCase("price"))
+                                if(!key.startsWith("update_") && !key.startsWith("quantity_check") && !key.startsWith("image") && !key.equalsIgnoreCase("quantity") && !key.equalsIgnoreCase("description") && !key.equalsIgnoreCase("available_flag") && !key.equalsIgnoreCase("pid") && !key.equalsIgnoreCase("sid") && !key.equalsIgnoreCase("price"))
                                 {
                                     try
                                     {

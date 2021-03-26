@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public static String loginUrl = sslProtocol+domain+"account/login";
     public static String searchUrl = sslProtocol+domain+"search/query";
     static String username = "GUEST";
-    static JSONObject userInfo = null;
+    static JSONObject userInfo = null, productDt = null;
 
     @SuppressLint("CheckResult")
     @Override
@@ -123,11 +125,10 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint({"WrongConstant"})
     public void getCard(JSONObject finalresumeData)
     {
-        LinearLayout linearLayout1 = findViewById(R.id.linearLayout);
+        RecyclerView recyclerView = findViewById(R.id.pageScrollView);
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_card);
-        linearLayout1.setAnimation(fadeIn);
-        linearLayout1.removeAllViews();
-        List<Integer> idList = new ArrayList<Integer>();
+        recyclerView.setAnimation(fadeIn);
+        ArrayList<String> title = new ArrayList<String>(), origin = new ArrayList<String>(), price = new ArrayList<String>(), imageUrl = new ArrayList<String>(), availableFlag = new ArrayList<String>(), productDet = new ArrayList<String>();
         try {
             if (finalresumeData!=null) // Resume
             {
@@ -137,54 +138,34 @@ public class MainActivity extends AppCompatActivity {
                 {
 
                     JSONObject card = prod.getJSONObject(i); // Take into of each card
-                    // We have inflated it
-                    View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.new_product_card, null);
-                    @SuppressLint({"NewApi", "LocalSuppress"}) int uniqueId = View.generateViewId();
-                    view.setId(uniqueId);
-                    idList.add(uniqueId);
+
+                    productDet.add(i, card.toString());
 
                     // Now we set the data
                     // Images
-                    ImageView imageView = (ImageView) view.findViewById(R.id.image);
                     JSONArray images = new JSONArray(card.getString("images"));
                     String id = (String)images.get(0);  // only the first image
-                    String album_art_path = imageUrl + id;
+                    String album_art_path = MainActivity.imageUrl + id;
                     if(!album_art_path.isEmpty())
                     {
-                        Glide.with(MainActivity.this)
-                                .load(album_art_path)
-                                .into(imageView);
+                        imageUrl.add(i, album_art_path);
                     }
 
                     // Text price
-                    TextView price = view.findViewById(R.id.price);
-                    price.setText(price.getText()+card.getString("price"));
+                    price.add(i, card.getString("price"));
 
                     // Text title
-                    TextView title = view.findViewById(R.id.productName);
-                    title.setText(card.getString("name"));
+                    title.add(i, card.getString("name"));
 
-                    TextView origin = view.findViewById(R.id.origin);
-                    origin.setText(origin.getText()+card.getString("origin_place"));
+                    origin.add(i, card.getString("origin_place"));
 
-                    String availableFlag = card.getString("available_flag");
-                    TextView stockInfo = view.findViewById(R.id.stock_info);
-                    MiscOperations.addStockFlagColorTextView(availableFlag, stockInfo);
-
-                    view.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent productDescritpionActivity = new Intent(MainActivity.this, ProductDescription.class);
-                            productDescritpionActivity.putExtra("productDetails", card.toString());
-                            productDescritpionActivity.putExtra("user_data", userInfo.toString());
-                            startActivity(productDescritpionActivity);
-                        }
-                    });
+                    availableFlag.add(i, card.getString("available_flag"));
 
 
-                    linearLayout1.addView(view);   // Add the horizontal layout to the vertical linear layout
                 }
-
+                Feed feedAdapter = new Feed(MainActivity.this, title, origin, price, imageUrl, availableFlag, userInfo.toString(), productDet);
+                recyclerView.setAdapter(feedAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -230,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
 
-                progressDialog.dismiss();
+            progressDialog.dismiss();
 
         }
 
@@ -272,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
                 else
                 {
                     output = output.getJSONObject("user_info");
-                    username = userInfo.getString("first_name")+" "+userInfo.getString("last_name");
+                    username = output.getString("first_name")+" "+output.getString("last_name");
                 }
 
             } catch (JSONException e) {

@@ -144,8 +144,6 @@
                                     android:layout_margin="10dp"
                                     android:textSize="22sp"
                                     android:gravity="center"
-                                    android:maxHeight="26sp"
-                                    android:minHeight="20sp"
                                     android:text="Title"
                                     android:textColor="@color/black"
                                     android:textStyle="bold"
