@@ -70,6 +70,7 @@ public class Feed extends RecyclerView.Adapter<Feed.FeedViewHolder> {
 
         Glide.with(context)
                 .load(imageUrl.get(position))
+                .override(holder.imageView.getWidth(), holder.imageView.getHeight())
                 .into(holder.imageView);
         holder.price.setText("");
         holder.title.setText("");

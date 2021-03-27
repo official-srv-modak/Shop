@@ -148,12 +148,15 @@ public class SearchActivity extends AppCompatActivity {
                                 if(!album_art_path.isEmpty())
                                     Glide.with(SearchActivity.this).load(album_art_path).into(imageView);
 
-                                TextView tv = (TextView) view.findViewById(R.id.showNameSearch), priceTv = (TextView) view.findViewById(R.id.price);
-                                CharSequence name = card.getString("name"), price = card.getString("price");
+                                TextView tv = (TextView) view.findViewById(R.id.showNameSearch), priceTv = (TextView) view.findViewById(R.id.price), stockInfoTv = (TextView) view.findViewById(R.id.searchStockInfo);
+                                CharSequence name = card.getString("name"), price = card.getString("price"), availableFlag = card.getString("available_flag");
                                 if(!name.toString().isEmpty())
                                     tv.setText(name);
                                 if(!price.toString().isEmpty())
                                     priceTv.setText(priceTv.getText()+price.toString());
+
+                                if(!availableFlag.toString().isEmpty())
+                                    MiscOperations.addStockFlagColorTextView(availableFlag.toString(), stockInfoTv);
 
                                 view.setOnClickListener(new View.OnClickListener() {
                                     @Override

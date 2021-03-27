@@ -42,6 +42,19 @@ import java.util.Map;
 public class MiscOperations {
 
 
+    public static void contactUs(String Message, Activity activity)
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
+        alertDialogBuilder.setMessage(Message);
+        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialogBuilder.show();
+    }
+
     public static void logout(String Message, Activity activity)
     {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
@@ -86,6 +99,11 @@ public class MiscOperations {
 
                     case R.id.logout: {
                         logout("Are you sure?", activity);
+                        break;
+                    }
+
+                    case R.id.contactUs: {
+                        contactUs("For technical assistance please contact :\nSourav Modak\nofficial.srv.modak@gmail.com", activity);
                         break;
                     }
 
