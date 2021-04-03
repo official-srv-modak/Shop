@@ -11,6 +11,10 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:fontFamily">sans-serif-light</item>
         <!-- Customize your theme here. -->
+    </style>
+    <style name="kisaraFont" parent="android:Widget.TextView">
+        <item name="android:fontFamily">arial</item>
     </style>
 </resources>

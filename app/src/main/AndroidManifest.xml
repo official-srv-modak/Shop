@@ -9,24 +9,33 @@
         android:allowBackup="true"
         android:icon="@mipmap/icon_kisaraa"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_kisaraa_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Shop"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OrderDetails"
+        <activity android:name=".CreateAccount"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:launchMode = "singleTask"/>
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".OrderDetails"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name=".SearchActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:launchMode = "singleTask"
-            android:windowSoftInputMode="stateVisible|adjustPan"/>
-        <activity android:name=".LoginPage"
-            android:launchMode = "singleTask" />
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".LoginPage"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name=".SplashScreen"
-            android:launchMode = "singleTask"
-            android:screenOrientation="portrait">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,12 +44,14 @@
         </activity>
         <activity
             android:name=".ProductDescription"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:launchMode = "singleTask"/>
+            android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:launchMode = "singleTask"/>
+            android:windowSoftInputMode="stateVisible|adjustPan" />
     </application>
 
 </manifest>

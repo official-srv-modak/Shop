@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/swipeRefreshMain"
+    android:background="@drawable/background_mobile"
+    tools:context=".CreateAccount">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="30dp"
+        android:background="@drawable/bar_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            app:cardCornerRadius="10dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/logo"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:srcCompat="@drawable/kisaraa" />
+
+                    <TextView
+                        android:id="@+id/orderDetailsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:maxHeight="26sp"
+                        android:minHeight="20sp"
+                        android:text="Create account"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.498"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.043" />
+
+
+                    <EditText
+                        android:id="@+id/usernameCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="40dp"
+                        android:inputType="textPersonName"
+                        android:hint="* Set username"/>
+
+
+                    <EditText
+                        android:id="@+id/passwordCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginHorizontal="40dp"
+                        android:hint="* password"
+                        android:inputType="textPassword" />
+
+                    <EditText
+                        android:id="@+id/repasswordCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginHorizontal="40dp"
+                        android:hint="* re-enter password"
+                        android:inputType="textPassword" />
+
+                    <EditText
+                        android:id="@+id/firstNameCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="40dp"
+                        android:inputType="textPersonName"
+                        android:hint="* First name"/>
+
+                    <EditText
+                        android:id="@+id/lasteNameCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="40dp"
+                        android:inputType="textPersonName"
+                        android:hint="* Last name"/>
+
+                    <EditText
+                        android:id="@+id/phoneCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="40dp"
+                        android:inputType="textPersonName"
+                        android:hint="* Mobile"/>
+
+                    <EditText
+                        android:id="@+id/emailCreate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="40dp"
+                        android:inputType="textPersonName"
+                        android:hint="Email (optional)"/>
+
+                    <Button
+                        android:id="@+id/createBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:text="Create account" />
+
+                    <TextView
+                        android:id="@+id/legend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:textSize="10sp"
+                        android:layout_marginBottom="20dp"
+                        android:text="[*] are mandatory" />
+
+                </LinearLayout>
+            </ScrollView>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

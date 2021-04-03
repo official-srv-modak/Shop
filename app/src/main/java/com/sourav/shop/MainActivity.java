@@ -45,12 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
     public static String awsdomain = "www.kisara.in:8081/";
     //public static String domain = "192.168.0.4:8081/";
-    public static String domain = awsdomain;
+    public static String domain = "192.168.0.4:8081/";
     public static String sslProtocol = "http://";
     public static String productUrl = sslProtocol+domain+"product/fetchproduct";
     public static String imageUrl = sslProtocol+domain+"ShopManager/image?id=";
     public static String loginUrl = sslProtocol+domain+"account/login";
     public static String searchUrl = sslProtocol+domain+"search/query";
+    public static String verifyinfoUrl = sslProtocol+domain+"account/verifyinfo";
+    public static String createCustAccountUrl = sslProtocol+domain+"account/createaccount";
     static String username = "GUEST";
     static JSONObject userInfo = null, productDt = null;
 

@@ -2,6 +2,7 @@ package com.sourav.shop;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -13,6 +14,7 @@ import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +63,7 @@ public class LoginPage extends AppCompatActivity {
         setContentView(R.layout.activity_login_page);
 
         getSupportActionBar().hide();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         TextView username = findViewById(R.id.usernameLogin), password = findViewById(R.id.passwordLogin);
         Button loginBtn = findViewById(R.id.loginBtn);
 
@@ -84,6 +87,16 @@ public class LoginPage extends AppCompatActivity {
                 {
                     Toast.makeText(LoginPage.this, "All inputs are mandatory", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createAccIntent = new Intent(LoginPage.this, CreateAccount.class);
+                String path = getIntent().getStringExtra("session_id_file_path");
+                createAccIntent.putExtra("session_id_file_path", path);
+                startActivity(createAccIntent);
             }
         });
     }
