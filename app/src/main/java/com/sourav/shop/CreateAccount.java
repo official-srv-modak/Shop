@@ -113,6 +113,7 @@ public class CreateAccount extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus)
                 {
+                    //usernameET.setText(usernameET.getText().toString().toLowerCase());
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -226,7 +227,7 @@ public class CreateAccount extends AppCompatActivity {
 
     public void createCustomerAccount(String username, String password, String firstName, String lastName, String mobile, String email)
     {
-        username = username.toLowerCase();
+        //username = username.toLowerCase();
         try {
             JSONObject req = new JSONObject();
             req.put("username", username);
