@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/swipeRefreshMain"
     android:background="@drawable/background_mobile"
-    tools:context=".LoginPage">
+    tools:context=".ThirdPartyAuth">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -54,57 +54,28 @@
                         android:gravity="center"
                         android:maxHeight="26sp"
                         android:minHeight="20sp"
-                        android:text="Login"
+                        android:text="Register"
                         android:textColor="@color/black"
                         android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.043" />
+                        android:textStyle="bold" />
 
 
-                    <EditText
-                        android:id="@+id/usernameLogin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="40dp"
-                        android:ems="10"
-                        android:gravity="center"
-                        android:hint="username"
-                        android:inputType="textPersonName"
-                        android:textAlignment="center"
-                        android:textColor="#000000" />
-
-                    <EditText
-                        android:id="@+id/passwordLogin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginHorizontal="40dp"
-                        android:hint="password"
-                        android:inputType="textPassword" />
-
-
-
-                    <Button
-                        android:id="@+id/loginBtn"
+                    <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:elevation="10dp"
                         android:layout_margin="20dp"
-                        android:layout_weight="1"
-                        android:autoSizeMaxTextSize="12dp"
-                        android:autoSizeMinTextSize="1dp"
-                        android:autoSizeStepGranularity="2sp"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:text="SIGN IN" />
+                        android:outlineSpotShadowColor="@color/black">
 
+                        <ImageView
+                            android:id="@+id/kisaraRegister"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:paddingLeft="10dp"
+                            app:srcCompat="@drawable/register_btn" />
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/or"
@@ -122,17 +93,6 @@
                         android:layout_gravity="center"
                         android:layout_margin="20dp"
                         android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/createAcc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:gravity="center"
-                        android:textSize="12sp"
-                        android:layout_marginBottom="20dp"
-                        android:text="New user? Create account" />
 
                 </LinearLayout>
             </ScrollView>

@@ -9,24 +9,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.SpannableString;
-import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class LoginPage extends AppCompatActivity {
@@ -93,10 +86,11 @@ public class LoginPage extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent createAccIntent = new Intent(LoginPage.this, CreateAccount.class);
+                Intent RegisterIntent = new Intent(LoginPage.this, ThirdPartyAuth.class);
                 String path = getIntent().getStringExtra("session_id_file_path");
-                createAccIntent.putExtra("session_id_file_path", path);
-                startActivity(createAccIntent);
+                RegisterIntent.putExtra("session_id_file_path", path);
+                RegisterIntent.putExtra("auth_type", "register");
+                startActivity(RegisterIntent);
             }
         });
     }

@@ -39,6 +39,9 @@ public class CreateAccount extends AppCompatActivity {
         getSupportActionBar().hide();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        //initialise form data if it is from another activity
+        initialiseAccountCreation();
+
         // check if the password entered twice match
         setPasswordValidation();
 
@@ -55,13 +58,105 @@ public class CreateAccount extends AppCompatActivity {
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateUserAccount cua = new CreateUserAccount();
-                cua.execute();
+
+                EditText reEnterPassword = findViewById(R.id.repasswordCreate),
+                        passwordET = findViewById(R.id.passwordCreate),
+                        usernameET = findViewById(R.id.usernameCreate),
+                        firstnameET = findViewById(R.id.firstNameCreate),
+                        lastnameET = findViewById(R.id.lasteNameCreate),
+                        mobileET = findViewById(R.id.phoneCreate),
+                        yobET = findViewById(R.id.yobCreate),
+                        emailET = findViewById(R.id.emailCreate);
+
+                String password = passwordET.getText().toString(),
+                        username = usernameET.getText().toString(),
+                        firstName = firstnameET.getText().toString(),
+                        lastName = lastnameET.getText().toString(),
+                        mobile = mobileET.getText().toString(),
+                        email = emailET.getText().toString(),
+                        yob = yobET.getText().toString(),
+                        repassword = reEnterPassword.getText().toString();
+
+
+                if(!repassword.isEmpty() && !password.isEmpty() && !username.isEmpty() && !firstName.isEmpty() && !lastName.isEmpty()) {
+                    if (checkPasswords(reEnterPassword, passwordET) && checkUsername(usernameET) && checkMobile(mobileET)) {
+                        CreateUserAccount cua = new CreateUserAccount();
+                        cua.execute(username, password, firstName, lastName, mobile, email, yob);
+                    }
+                }
+                else
+                {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(CreateAccount.this, "Please fill the mandatory inputs", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+
+
             }
         });
 
 
     }
+
+    private void initialiseAccountCreation() {
+        if(!getIntent().hasExtra("direct_create"))
+        {
+            try {
+
+                if(getIntent().hasExtra("user_data"))
+                {
+                    JSONObject jsonData = new JSONObject(getIntent().getStringExtra("user_data"));
+                    String username = jsonData.getString("username"),
+                            firstName = jsonData.getString("first_name"),
+                            lastName = jsonData.getString("last_name"),
+                            email = jsonData.getString("email");
+
+
+                    EditText usernameET = findViewById(R.id.usernameCreate),
+                            firstnameET = findViewById(R.id.firstNameCreate),
+                            lastnameET = findViewById(R.id.lasteNameCreate),
+                            emailET = findViewById(R.id.emailCreate);
+
+                    usernameET.setText(username);
+                    firstnameET.setText(firstName);
+                    lastnameET.setText(lastName);
+                    emailET.setText(email);
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(getIntent().hasExtra("direct_create"))
+        {
+            if(getIntent().getStringExtra("direct_create").equals("1"))
+            {
+                try {
+                    JSONObject jsonObject = new JSONObject(getIntent().getStringExtra("user_data"));
+
+                    String password = jsonObject.getString("password"),
+                            username = jsonObject.getString("username"),
+                            firstName = jsonObject.getString("first_name"),
+                            lastName = jsonObject.getString("last_name"),
+                            mobile = "",
+                            email = jsonObject.getString("email"),
+                            yob = "";
+
+                    CreateUserAccount cua = new CreateUserAccount();
+                    cua.execute(username, password, firstName, lastName, mobile, email, yob);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
     void intialiseYob()
     {
         Calendar calendar = Calendar.getInstance();
@@ -322,42 +417,10 @@ public class CreateAccount extends AppCompatActivity {
     private class CreateUserAccount extends AsyncTask<String, Void, Integer> {
         protected Integer doInBackground(String... data) {
 
-            EditText reEnterPassword = findViewById(R.id.repasswordCreate),
-                    passwordET = findViewById(R.id.passwordCreate),
-                    usernameET = findViewById(R.id.usernameCreate),
-                    firstnameET = findViewById(R.id.firstNameCreate),
-                    lastnameET = findViewById(R.id.lasteNameCreate),
-                    mobileET = findViewById(R.id.phoneCreate),
-                    yobET = findViewById(R.id.yobCreate),
-                    emailET = findViewById(R.id.emailCreate);
 
-            String password = passwordET.getText().toString(),
-                    username = usernameET.getText().toString(),
-                    firstName = firstnameET.getText().toString(),
-                    lastName = lastnameET.getText().toString(),
-                    mobile = mobileET.getText().toString(),
-                    email = emailET.getText().toString(),
-                    yob = yobET.getText().toString(),
-                    repassword = reEnterPassword.getText().toString();
+            String username = data[0], password = data[1], firstName = data[2], lastName = data[3], mobile = data[4], email = data[5], yob = data[6];
 
-
-            if(!repassword.isEmpty() && !password.isEmpty() && !username.isEmpty() && !firstName.isEmpty() && !lastName.isEmpty() && !mobile.isEmpty() && !yob.isEmpty())
-            {
-                if(checkPasswords(reEnterPassword, passwordET) && checkUsername(usernameET) && checkMobile(mobileET))
-                {
-                    createCustomerAccount(username, password, firstName, lastName, yob, mobile, email);
-                }
-            }
-            else
-            {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(CreateAccount.this, "Please fill the mandatory inputs", Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-
+            createCustomerAccount(username, password, firstName, lastName, yob, mobile, email);
 
             return null;
         }
@@ -383,4 +446,6 @@ public class CreateAccount extends AppCompatActivity {
 
         }
     }
+
+
 }
