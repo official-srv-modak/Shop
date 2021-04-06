@@ -4,22 +4,29 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
 
 import static com.sourav.shop.LoginPage.writeSessionIdDevice;
 
@@ -38,6 +45,9 @@ public class CreateAccount extends AppCompatActivity {
         // Check the username if registered
         setUsernameValidation();
 
+        // date picker for year of birth
+        intialiseYob();
+
         // Check the mobile if registered
         setMobileValidation();
 
@@ -51,6 +61,45 @@ public class CreateAccount extends AppCompatActivity {
         });
 
 
+    }
+    void intialiseYob()
+    {
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        EditText yob = findViewById(R.id.yobCreate);
+        Button yobBtn = findViewById(R.id.yobBtn);
+        DatePickerDialog.OnDateSetListener setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                Integer tempYr = year;
+                Integer curYr = Calendar.getInstance().get(Calendar.YEAR);
+                if(curYr > tempYr)
+                {
+                    String yearStr = tempYr.toString();
+                    yob.setText(yearStr);
+                }
+                else
+                {
+                    Toast.makeText(CreateAccount.this, "Invalid date, baby is not mature enough", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+
+        yobBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker(setListener, year, month, day);
+            }
+        });
+    }
+    void showDatePicker(DatePickerDialog.OnDateSetListener setListener, int year, int month, int day)
+    {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CreateAccount.this, setListener, year, month, day);
+        datePickerDialog.getDatePicker();
+        datePickerDialog.show();
     }
     public void setMobileValidation()
     {
@@ -225,7 +274,7 @@ public class CreateAccount extends AppCompatActivity {
 
     }
 
-    public void createCustomerAccount(String username, String password, String firstName, String lastName, String mobile, String email)
+    public void createCustomerAccount(String username, String password, String firstName, String lastName, String yob, String mobile, String email)
     {
         //username = username.toLowerCase();
         try {
@@ -234,6 +283,7 @@ public class CreateAccount extends AppCompatActivity {
             req.put("password", password);
             req.put("first_name", firstName);
             req.put("last_name", lastName);
+            req.put("yob", yob);
             req.put("phone_number", mobile);
             req.put("email_id", email);
             JSONObject res = MiscOperations.getDataFromServerPOST(MainActivity.createCustAccountUrl, req);
@@ -278,6 +328,7 @@ public class CreateAccount extends AppCompatActivity {
                     firstnameET = findViewById(R.id.firstNameCreate),
                     lastnameET = findViewById(R.id.lasteNameCreate),
                     mobileET = findViewById(R.id.phoneCreate),
+                    yobET = findViewById(R.id.yobCreate),
                     emailET = findViewById(R.id.emailCreate);
 
             String password = passwordET.getText().toString(),
@@ -286,14 +337,15 @@ public class CreateAccount extends AppCompatActivity {
                     lastName = lastnameET.getText().toString(),
                     mobile = mobileET.getText().toString(),
                     email = emailET.getText().toString(),
+                    yob = yobET.getText().toString(),
                     repassword = reEnterPassword.getText().toString();
 
 
-            if(!repassword.isEmpty() && !password.isEmpty() && !username.isEmpty() && !firstName.isEmpty() && !lastName.isEmpty() && !mobile.isEmpty())
+            if(!repassword.isEmpty() && !password.isEmpty() && !username.isEmpty() && !firstName.isEmpty() && !lastName.isEmpty() && !mobile.isEmpty() && !yob.isEmpty())
             {
                 if(checkPasswords(reEnterPassword, passwordET) && checkUsername(usernameET) && checkMobile(mobileET))
                 {
-                    createCustomerAccount(username, password, firstName, lastName, mobile, email);
+                    createCustomerAccount(username, password, firstName, lastName, yob, mobile, email);
                 }
             }
             else

@@ -121,6 +121,31 @@
                         android:inputType="textPersonName"
                         android:hint="* Last name"/>
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/yobCreate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:editable="false"
+                            android:paddingHorizontal="20sp"
+                            android:gravity="center"
+                            android:hint="* Select DOB"
+                            android:inputType="none" />
+
+                        <Button
+                            android:id="@+id/yobBtn"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:text="..." />
+
+                    </LinearLayout>
+
                     <EditText
                         android:id="@+id/phoneCreate"
                         android:layout_width="match_parent"
