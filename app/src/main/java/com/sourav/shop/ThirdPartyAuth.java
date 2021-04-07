@@ -4,7 +4,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +22,10 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.sourav.shop.LoginPage.writeSessionIdDevice;
 
 public class ThirdPartyAuth extends AppCompatActivity {
 
@@ -29,7 +34,6 @@ public class ThirdPartyAuth extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_third_party_auth);
 
         getSupportActionBar().hide();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -37,6 +41,7 @@ public class ThirdPartyAuth extends AppCompatActivity {
 
         if(getIntent().getStringExtra("auth_type").equals("register"))
         {
+            setContentView(R.layout.activity_third_party_auth);
             intialiseRegister();
         }
         else if(getIntent().getStringExtra("auth_type").equals("login"))
@@ -46,9 +51,23 @@ public class ThirdPartyAuth extends AppCompatActivity {
 
     }
 
-    private void intialiseLogin() {
+    void intialiseLogin() {
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
+
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     private void intialiseRegister()
@@ -138,12 +157,12 @@ public class ThirdPartyAuth extends AppCompatActivity {
                 String personFamilyName = acct.getFamilyName();
                 String personEmail = acct.getEmail();
                 String username = personEmail.split("@")[0];
-                String password = "";
+                String password = acct.getId();;
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 
                     password = PasswordGenerator.generateStrongPassword();
-                }
+                }*/
                 if(password.isEmpty())
                 {
                     JSONObject jsonObject = new JSONObject();
@@ -170,13 +189,9 @@ public class ThirdPartyAuth extends AppCompatActivity {
                     jsonObject.put("email", personEmail);
                     jsonObject.put("password", password);
 
-                    Intent createAccountIntent = new Intent(ThirdPartyAuth.this, CreateAccount.class);
-                    String path = getIntent().getStringExtra("session_id_file_path");
-                    createAccountIntent.putExtra("user_data", jsonObject.toString());
-                    createAccountIntent.putExtra("session_id_file_path", path);
-                    createAccountIntent.putExtra("direct_create", "1");
+                    ValidateAccount va = new ValidateAccount();
+                    va.execute(username, password, personGivenName, personFamilyName, "", personEmail, "");
 
-                    startActivity(createAccountIntent);
                 }
 
 
@@ -191,5 +206,77 @@ public class ThirdPartyAuth extends AppCompatActivity {
 
     }
 
+    private class ValidateAccount extends AsyncTask<String, Void, Integer> {
+        protected Integer doInBackground(String... data) {
+
+            String username = data[0], password = data[1], firstName = data[2], lastName = data[3], mobile = data[4], email = data[5], yob = data[6];
+
+            try {
+                JSONObject req = new JSONObject();
+                req.put("username", username);
+                req.put("password", password);
+                req.put("first_name", firstName);
+                req.put("last_name", lastName);
+                req.put("yob", yob);
+                req.put("phone_number", mobile);
+                req.put("email_id", email);
+                JSONObject res = MiscOperations.getDataFromServerPOST(MainActivity.createCustAccountUrl, req);
+
+                if(res != null && res.length() != 0) {
+                    if (res.has("allowed")) {
+                        if (res.getString("allowed").equals("true")) {
+
+                            try {
+
+                                JSONObject userInfo = new JSONObject(), output = new JSONObject();
+                                userInfo.put("username", username);
+                                userInfo.put("password", password);
+                                output = MiscOperations.getDataFromServerPOST(MainActivity.loginUrl, userInfo);
+
+                                String path = getIntent().getStringExtra("session_id_file_path");
+                                writeSessionIdDevice(path, output.toString());
+                                Intent mainActivityIntent = new Intent(ThirdPartyAuth.this, MainActivity.class);
+                                mainActivityIntent.putExtra("user_data", output.toString());
+                                mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainActivityIntent);
+
+                                finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        ProgressDialog progressDialog = new ProgressDialog(ThirdPartyAuth.this);;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog.setMessage("Verifying your account...");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setCancelable(true);
+            progressDialog.show();
+
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+
+            progressDialog.dismiss();
+
+        }
+    }
 
 }

@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.SignInButton;
+
 import org.json.JSONObject;
 
 import java.io.File;
@@ -90,6 +92,20 @@ public class LoginPage extends AppCompatActivity {
                 String path = getIntent().getStringExtra("session_id_file_path");
                 RegisterIntent.putExtra("session_id_file_path", path);
                 RegisterIntent.putExtra("auth_type", "register");
+                startActivity(RegisterIntent);
+            }
+        });
+
+        // Google sign in
+
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent RegisterIntent = new Intent(LoginPage.this, ThirdPartyAuth.class);
+                String path = getIntent().getStringExtra("session_id_file_path");
+                RegisterIntent.putExtra("session_id_file_path", path);
+                RegisterIntent.putExtra("auth_type", "login");
                 startActivity(RegisterIntent);
             }
         });

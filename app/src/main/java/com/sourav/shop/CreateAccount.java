@@ -102,40 +102,10 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private void initialiseAccountCreation() {
-        if(!getIntent().hasExtra("direct_create"))
-        {
-            try {
 
+            try {
                 if(getIntent().hasExtra("user_data"))
                 {
-                    JSONObject jsonData = new JSONObject(getIntent().getStringExtra("user_data"));
-                    String username = jsonData.getString("username"),
-                            firstName = jsonData.getString("first_name"),
-                            lastName = jsonData.getString("last_name"),
-                            email = jsonData.getString("email");
-
-
-                    EditText usernameET = findViewById(R.id.usernameCreate),
-                            firstnameET = findViewById(R.id.firstNameCreate),
-                            lastnameET = findViewById(R.id.lasteNameCreate),
-                            emailET = findViewById(R.id.emailCreate);
-
-                    usernameET.setText(username);
-                    firstnameET.setText(firstName);
-                    lastnameET.setText(lastName);
-                    emailET.setText(email);
-                }
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        else if(getIntent().hasExtra("direct_create"))
-        {
-            if(getIntent().getStringExtra("direct_create").equals("1"))
-            {
-                try {
                     JSONObject jsonObject = new JSONObject(getIntent().getStringExtra("user_data"));
 
                     String password = jsonObject.getString("password"),
@@ -149,11 +119,12 @@ public class CreateAccount extends AppCompatActivity {
                     CreateUserAccount cua = new CreateUserAccount();
                     cua.execute(username, password, firstName, lastName, mobile, email, yob);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }
+
 
     }
 

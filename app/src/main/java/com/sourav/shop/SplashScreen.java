@@ -55,6 +55,7 @@ public class SplashScreen extends AppCompatActivity {
 
 
         ImageView logoNameSplashText = findViewById(R.id.logoSplashScreenText), logoNameSplashImage = findViewById(R.id.logoSplashScreen), madeInIndiaLogo = findViewById(R.id.made_in_india_logo);
+        logoNameSplashText.setVisibility(View.VISIBLE);
         logoNameSplashText.setAnimation(textAnim);
         logoNameSplashImage.setAnimation(imageAnim);
         madeInIndiaLogo.setAnimation(slideInUp);
@@ -65,8 +66,9 @@ public class SplashScreen extends AppCompatActivity {
 
     public void noAnimationStart()
     {
-        ImageView logoNameSplashText = findViewById(R.id.logoSplashScreenText);
+        ImageView logoNameSplashText = findViewById(R.id.logoSplashScreenText), logoNameSplashImage = findViewById(R.id.logoSplashScreen);
         logoNameSplashText.setVisibility(View.INVISIBLE);
+        logoNameSplashImage.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -78,6 +80,9 @@ public class SplashScreen extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sessionIdFilePath = getApplicationContext().getFilesDir().getAbsolutePath() + File.separator + "session_id.json";
         JSONObject userData = null;
+        ImageView logoNameSplashImage = findViewById(R.id.logoSplashScreen);
+        logoNameSplashImage.setVisibility(View.INVISIBLE);
+
 
         String sessionId = null;
         String temp = getUserData(sessionIdFilePath);
