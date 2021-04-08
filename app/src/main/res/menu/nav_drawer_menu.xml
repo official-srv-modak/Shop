@@ -10,8 +10,8 @@
             android:icon="@drawable/kisaraa"
             android:checked="false"/>
         <item
-            android:id="@+id/settings"
-            android:title="Settings"
+            android:id="@+id/accountSettings"
+            android:title="Account settings"
             android:icon="@drawable/settings_foreground"
             android:checked="false"/>
         <item

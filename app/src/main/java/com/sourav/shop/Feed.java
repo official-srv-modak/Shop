@@ -77,7 +77,7 @@ public class Feed extends RecyclerView.Adapter<Feed.FeedViewHolder> {
         holder.origin.setText("");
         holder.stockInfo.setText("");
 
-        holder.price.setText(holder.price.getText()+ price.get(position));
+        holder.price.setText(holder.price.getText() + price.get(position));
         holder.title.setText(title.get(position));
         holder.origin.setText(holder.origin.getText()+ origin.get(position));
         MiscOperations.addStockFlagColorTextView(availableFlag.get(position), holder.stockInfo);

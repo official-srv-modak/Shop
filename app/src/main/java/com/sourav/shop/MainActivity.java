@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     // Text price
-                    price.add(i, card.getString("price"));
+                    price.add(i, getResources().getString(R.string.currency_india)+card.getString("price"));
 
                     // Text title
                     title.add(i, card.getString("name"));
