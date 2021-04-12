@@ -84,6 +84,18 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
+        <TextView
+            android:id="@+id/sellerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:textSize="12sp"
+            android:layout_marginHorizontal="10sp"
+            android:layout_marginVertical="5sp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

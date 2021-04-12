@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.pageScrollView);
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_card);
         recyclerView.setAnimation(fadeIn);
-        ArrayList<String> title = new ArrayList<String>(), origin = new ArrayList<String>(), price = new ArrayList<String>(), imageUrl = new ArrayList<String>(), availableFlag = new ArrayList<String>(), productDet = new ArrayList<String>();
+        ArrayList<String> title = new ArrayList<String>(), origin = new ArrayList<String>(), price = new ArrayList<String>(), imageUrl = new ArrayList<String>(), availableFlag = new ArrayList<String>(), productDet = new ArrayList<String>(), seller = new ArrayList<>();
         try {
             if (finalresumeData!=null) // Resume
             {
@@ -163,9 +163,11 @@ public class MainActivity extends AppCompatActivity {
 
                     availableFlag.add(i, card.getString("available_flag"));
 
+                    seller.add(i, card.getString("seller_name")+"'s collections");
+
 
                 }
-                Feed feedAdapter = new Feed(MainActivity.this, title, origin, price, imageUrl, availableFlag, userInfo.toString(), productDet);
+                Feed feedAdapter = new Feed(MainActivity.this, title, seller, origin, price, imageUrl, availableFlag, userInfo.toString(), productDet);
                 recyclerView.setAdapter(feedAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
             }

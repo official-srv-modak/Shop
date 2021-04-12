@@ -30,11 +30,11 @@ import java.util.List;
 public class Feed extends RecyclerView.Adapter<Feed.FeedViewHolder> {
 
    // JSONObject card;
-    ArrayList<String> title = new ArrayList<String>(), origin = new ArrayList<String>(), price = new ArrayList<String>(), imageUrl = new ArrayList<String>(), availableFlag = new ArrayList<String>(), productDet = new ArrayList<String>();
+    ArrayList<String> title = new ArrayList<String>(), origin = new ArrayList<String>(), price = new ArrayList<String>(), imageUrl = new ArrayList<String>(), availableFlag = new ArrayList<String>(), productDet = new ArrayList<String>(), seller = new ArrayList<String>();
     Context context;
     String userInfo, productDt;
 
-    public Feed(Context context, ArrayList<String> title, ArrayList<String> origin, ArrayList<String> price, ArrayList<String> imageUrl, ArrayList<String> availableFlag, String userInfo, ArrayList<String> productDet)
+    public Feed(Context context, ArrayList<String> title, ArrayList<String> seller, ArrayList<String> origin, ArrayList<String> price, ArrayList<String> imageUrl, ArrayList<String> availableFlag, String userInfo, ArrayList<String> productDet)
     {
         this.context = context;
         this.title = title;
@@ -44,6 +44,7 @@ public class Feed extends RecyclerView.Adapter<Feed.FeedViewHolder> {
         this.imageUrl = imageUrl;
         this.userInfo = userInfo;
         this.productDet = productDet;
+        this.seller = seller;
     }
 
     /*public Feed(Context context, JSONObject card, String userInfo)
@@ -81,6 +82,7 @@ public class Feed extends RecyclerView.Adapter<Feed.FeedViewHolder> {
         holder.price.setText(holder.price.getText() + price.get(position));
         holder.title.setText(title.get(position));
         holder.origin.setText(holder.origin.getText()+ origin.get(position));
+        holder.seller.setText(seller.get(position));
         MiscOperations.addStockFlagColorTextView(availableFlag.get(position), holder.stockInfo);
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +105,7 @@ public class Feed extends RecyclerView.Adapter<Feed.FeedViewHolder> {
 
         ImageView imageView;
         CardView card;
-        TextView price, title, origin, stockInfo;
+        TextView price, title, origin, stockInfo, seller;
 
         public FeedViewHolder(@NonNull View view)
         {
@@ -122,6 +124,8 @@ public class Feed extends RecyclerView.Adapter<Feed.FeedViewHolder> {
                 origin = view.findViewById(R.id.origin);
 
                 stockInfo = view.findViewById(R.id.stock_info);
+
+                seller = view.findViewById(R.id.sellerName);
 
         }
 
