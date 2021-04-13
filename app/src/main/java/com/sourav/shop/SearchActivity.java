@@ -41,7 +41,7 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        ImageView backBtn = findViewById(R.id.backBtn);
+        ImageView backBtn = findViewById(R.id.backBtn), clearTextBtn = findViewById(R.id.clearBtn);
 
         username = getIntent().getStringExtra("username");
         try {
@@ -94,6 +94,13 @@ public class SearchActivity extends AppCompatActivity {
                 TextView queryTitle = findViewById(R.id.queryTitle);
                 if(searchTextBox.getText().toString().isEmpty())
                     queryTitle.setText(getResources().getText(R.string.search_msg));
+            }
+        });
+
+        clearTextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchTextBox.setText("");
             }
         });
     }

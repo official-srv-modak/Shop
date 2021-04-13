@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
                 android:layout_margin="5dp"
-                android:background="@drawable/seller_tag_color_white"
+                android:background="@drawable/tag_color_white"
                 android:scaleType="centerCrop"
                 android:orientation="horizontal">
 
