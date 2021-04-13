@@ -24,7 +24,7 @@
         app:menu="@menu/nav_drawer_menu"
         android:layout_gravity="start"/>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/swipeRefreshMain">
@@ -122,6 +122,6 @@
 
 
         </LinearLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

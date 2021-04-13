@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -53,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
     public static String searchUrl = sslProtocol+domain+"search/query";
     public static String verifyinfoUrl = sslProtocol+domain+"account/verifyinfo";
     public static String createCustAccountUrl = sslProtocol+domain+"account/createaccount";
-    static String username = "GUEST";
+    static String username = "GUEST", msg = "";
     static JSONObject userInfo = null, productDt = null;
+    static Boolean refreshFlag = false;
 
     @SuppressLint("CheckResult")
     @Override
@@ -78,20 +80,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JSONArray pidArray = new JSONArray();
-        pidArray.put("all");
-        TextView heading = findViewById(R.id.heading);
-        heading.setText("Our collections");
-        JSONObject pidObj = new JSONObject();
-        try {
-            pidObj.put("session_id", userInfo.get("session_id").toString());
-            pidObj.put("pid", pidArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        LoadCard ld = new LoadCard();
-        ld.execute(productUrl, pidObj.toString());
-
+        refreshData("Welcome, "+username+" loading products");
 
         //App bar codes
         ImageView menu = findViewById(R.id.menu_btn);
@@ -108,9 +97,37 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(searchIntent);
             }
         });
+
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshMain);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //refreshFlag = true;
+                refreshData("Refreshing");
+                swipeRefreshLayout.setRefreshing(false);
+                refreshFlag = false;
+            }
+        });
     }
 
-
+    void refreshData(String msg)
+    {
+        this.msg = msg;
+        JSONArray pidArray = new JSONArray();
+        pidArray.put("all");
+        TextView heading = findViewById(R.id.heading);
+        heading.setText("Our collections");
+        JSONObject pidObj = new JSONObject();
+        try {
+            pidObj.put("session_id", userInfo.get("session_id").toString());
+            pidObj.put("pid", pidArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        LoadCard ld = new LoadCard();
+        ld.execute(productUrl, pidObj.toString(), msg);
+    }
 
     @Override
     public void onBackPressed() {
@@ -204,10 +221,14 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog.setMessage("Welcome, "+username+" loading products");
-            progressDialog.setIndeterminate(false);
-            progressDialog.setCancelable(true);
-            progressDialog.show();
+            if(!refreshFlag)
+            {
+                progressDialog.setMessage(msg);
+                progressDialog.setIndeterminate(false);
+                progressDialog.setCancelable(true);
+                progressDialog.show();
+            }
+
 
         }
 
@@ -215,7 +236,11 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
 
-            progressDialog.dismiss();
+            if(!refreshFlag)
+            {
+                progressDialog.dismiss();
+            }
+
 
         }
 
