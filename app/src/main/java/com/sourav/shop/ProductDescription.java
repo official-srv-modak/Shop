@@ -139,7 +139,7 @@ public class ProductDescription extends AppCompatActivity {
                             if(productData.has("delivery_fee"))
                                 deliveryFee.setText(deliveryFee.getText()+productData.getString("delivery_fee"));
                             if(productData.has("seller_name"))
-                                seller.setText(Html.fromHtml("<b>Sold by - </b>"+productData.getString("seller_name")));
+                                seller.setText(productData.getString("seller_name")+getResources().getString(R.string.seller_phrase));
 
 
                             ImageView imageView = (ImageView) findViewById(R.id.productDescriptionImage);

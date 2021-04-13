@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
                     availableFlag.add(i, card.getString("available_flag"));
 
-                    seller.add(i, card.getString("seller_name")+"'s collections");
+                    seller.add(i, card.getString("seller_name")+getResources().getString(R.string.seller_phrase));
 
 
                 }

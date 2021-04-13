@@ -136,10 +136,9 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical" >
 
-                                <androidx.constraintlayout.widget.ConstraintLayout
+                                <FrameLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginVertical="10dp">
+                                    android:layout_height="match_parent">
 
                                     <ImageView
                                         android:id="@+id/productDescriptionBackBtn"
@@ -154,27 +153,52 @@
                                         app:layout_constraintTop_toTopOf="parent"
                                         app:srcCompat="@drawable/back" />
 
-                                    <TextView
-                                        android:id="@+id/orderDetailsTitle"
-                                        android:layout_width="250dp"
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:autoSizeMaxTextSize="20sp"
-                                        android:autoSizeMinTextSize="18sp"
-                                        android:autoSizeStepGranularity="2sp"
-                                        android:autoSizeTextType="uniform"
-                                        android:gravity="center"
-                                        android:minHeight="25sp"
-                                        android:text="Title"
-                                        android:textColor="@color/black"
-                                        android:textStyle="bold"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintHorizontal_bias="0.495"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:layout_constraintVertical_bias="0.533" />
+                                        android:layout_gravity="center|right"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/tag_color_white"
+                                        android:orientation="horizontal"
+                                        android:scaleType="centerCrop">
 
-                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                        <ImageView
+                                            android:id="@+id/imageView2"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:layout_gravity="center"
+                                            app:srcCompat="@drawable/kisaraa" />
+
+                                        <TextView
+                                            android:id="@+id/productDescriptionSellerName"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:padding="5sp"
+                                            android:text="Seller name"
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+                                </FrameLayout>
+
+                                <TextView
+                                    android:id="@+id/orderDetailsTitle"
+                                    android:layout_width="250dp"
+                                    android:layout_height="wrap_content"
+                                    android:autoSizeMaxTextSize="20sp"
+                                    android:autoSizeMinTextSize="18sp"
+                                    android:autoSizeStepGranularity="2sp"
+                                    android:autoSizeTextType="uniform"
+                                    android:layout_margin="10dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:minHeight="25sp"
+                                    android:text="Title"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/productDescriptionImage"
@@ -192,14 +216,14 @@
 
                                 <TextView
                                     android:id="@+id/productDescriptionCardStockDetails"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center|left"
                                     android:layout_margin="10dp"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold"
-                                    android:layout_gravity="center"
+                                    android:text="StockInfo"
                                     android:textColor="@color/black"
-                                    android:text="" />
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/productDescriptionPrice"
@@ -247,19 +271,6 @@
                                     android:layout_gravity="center"
                                     android:textColor="@color/black"
                                     android:text="Shipping from - " />
-
-                                <TextView
-                                    android:id="@+id/productDescriptionSellerName"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="10dp"
-                                    android:layout_marginHorizontal="5dp"
-                                    android:layout_marginVertical="10dp"
-                                    android:maxHeight="25sp"
-                                    android:minHeight="12sp"
-                                    android:textColor="@color/black"
-                                    android:textSize="15sp" />
 
                                 <TextView
                                     android:id="@+id/productDetails"
