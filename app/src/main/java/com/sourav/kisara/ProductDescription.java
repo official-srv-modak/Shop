@@ -1,4 +1,4 @@
-package com.sourav.shop;
+package com.sourav.kisara;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -31,7 +31,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static com.sourav.shop.MainActivity.imageUrl;
+import static com.sourav.kisara.MainActivity.imageUrl;
 
 public class ProductDescription extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.sourav.shop;
+package com.sourav.kisara;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -22,10 +22,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
-import static com.sourav.shop.MainActivity.imageUrl;
+import static com.sourav.kisara.MainActivity.imageUrl;
 
 public class OrderDetails extends AppCompatActivity {
 

@@ -1,13 +1,11 @@
-package com.sourav.shop;
+package com.sourav.kisara;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +23,7 @@ import com.google.android.gms.tasks.Task;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.sourav.shop.LoginPage.writeSessionIdDevice;
+import static com.sourav.kisara.LoginPage.writeSessionIdDevice;
 
 public class ThirdPartyAuth extends AppCompatActivity {
 

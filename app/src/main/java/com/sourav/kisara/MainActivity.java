@@ -1,6 +1,5 @@
-package com.sourav.shop;
+package com.sourav.kisara;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -15,21 +14,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -38,9 +30,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     static String username = "GUEST", msg = "";
     static JSONObject userInfo = null, productDt = null;
     static Boolean refreshFlag = false;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @SuppressLint("CheckResult")
     @Override
@@ -98,14 +88,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshMain);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshMain);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //refreshFlag = true;
-                refreshData("Refreshing");
-                swipeRefreshLayout.setRefreshing(false);
+                refreshFlag = true;
+                refreshData("Refreshing product list");
                 refreshFlag = false;
             }
         });
@@ -239,9 +228,10 @@ public class MainActivity extends AppCompatActivity {
             if(!refreshFlag)
             {
                 progressDialog.dismiss();
+
             }
 
-
+            swipeRefreshLayout.setRefreshing(false);
         }
 
     }

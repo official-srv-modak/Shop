@@ -1,4 +1,4 @@
-package com.sourav.shop;
+package com.sourav.kisara;
 
 import org.junit.Test;
 

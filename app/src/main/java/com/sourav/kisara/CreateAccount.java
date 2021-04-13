@@ -1,4 +1,4 @@
-package com.sourav.shop;
+package com.sourav.kisara;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,26 +9,20 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.Calendar;
-import java.util.Date;
 
-import static com.sourav.shop.LoginPage.writeSessionIdDevice;
+import static com.sourav.kisara.LoginPage.writeSessionIdDevice;
 
 public class CreateAccount extends AppCompatActivity {
 
