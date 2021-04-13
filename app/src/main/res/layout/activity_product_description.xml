@@ -153,35 +153,43 @@
                                         app:layout_constraintTop_toTopOf="parent"
                                         app:srcCompat="@drawable/back" />
 
-                                    <LinearLayout
+                                    <androidx.cardview.widget.CardView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center|right"
                                         android:layout_margin="10dp"
-                                        android:background="@drawable/tag_color_white"
-                                        android:orientation="horizontal"
-                                        android:scaleType="centerCrop">
+                                        android:elevation="5dp"
+                                        app:cardCornerRadius="5dp">
 
-
-                                        <ImageView
-                                            android:id="@+id/imageView2"
-                                            android:layout_width="20dp"
-                                            android:layout_height="20dp"
-                                            android:layout_gravity="center"
-                                            app:srcCompat="@drawable/kisaraa" />
-
-                                        <TextView
-                                            android:id="@+id/productDescriptionSellerName"
+                                        <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:padding="5sp"
-                                            android:text="Seller name"
-                                            android:textColor="@color/black"
-                                            android:textSize="12sp"
-                                            android:textStyle="bold" />
-                                    </LinearLayout>
+                                            android:background="@drawable/tag_color_white"
+                                            android:orientation="horizontal"
+                                            android:scaleType="centerCrop">
+
+
+                                            <ImageView
+                                                android:id="@+id/imageView2"
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:layout_gravity="center"
+                                                app:srcCompat="@drawable/kisaraa" />
+
+                                            <TextView
+                                                android:id="@+id/productDescriptionSellerName"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:padding="5sp"
+                                                android:text="Seller name"
+                                                android:textColor="@color/black"
+                                                android:textSize="12sp"
+                                                android:textStyle="bold" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
                                 </FrameLayout>
 
                                 <TextView
@@ -200,18 +208,24 @@
                                     android:textColor="@color/black"
                                     android:textStyle="bold" />
 
-                                <ImageView
-                                    android:id="@+id/productDescriptionImage"
+                                <androidx.cardview.widget.CardView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.498"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="0.276"
-                                    tools:srcCompat="@tools:sample/avatars" />
+                                    android:elevation="10dp">
+
+                                    <ImageView
+                                        android:id="@+id/productDescriptionImage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.498"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.276"
+                                        tools:srcCompat="@tools:sample/avatars" />
+                                </androidx.cardview.widget.CardView>
 
 
                                 <TextView
