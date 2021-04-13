@@ -136,23 +136,40 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical" >
 
-                                <TextView
-                                    android:id="@+id/orderDetailsTitle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="10dp"
-                                    android:textSize="22sp"
-                                    android:gravity="center"
-                                    android:text="Title"
-                                    android:textColor="@color/black"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.498"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="0.043" />
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageView
+                                        android:id="@+id/productDescriptionBackBtn"
+                                        android:layout_width="45dp"
+                                        android:layout_height="45dp"
+                                        android:paddingHorizontal="10dp"
+                                        android:paddingVertical="8dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/orderDetailsTitle"
+                                        app:layout_constraintHorizontal_bias="0.0"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:srcCompat="@drawable/back" />
+
+                                    <TextView
+                                        android:id="@+id/orderDetailsTitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="10dp"
+                                        android:gravity="center"
+                                        android:text="Title"
+                                        android:textColor="@color/black"
+                                        android:textSize="22sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.498"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
 
                                 <ImageView
                                     android:id="@+id/productDescriptionImage"

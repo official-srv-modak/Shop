@@ -146,7 +146,7 @@ public class SearchActivity extends AppCompatActivity {
                                 String album_art_path = (String) card.getJSONArray("images").get(0);
                                 album_art_path = MainActivity.imageUrl+album_art_path;
                                 if(!album_art_path.isEmpty())
-                                    Glide.with(SearchActivity.this).load(album_art_path).into(imageView);
+                                    Glide.with(SearchActivity.this).load(album_art_path).timeout(60000).into(imageView);
 
                                 TextView tv = (TextView) view.findViewById(R.id.showNameSearch), priceTv = (TextView) view.findViewById(R.id.price), stockInfoTv = (TextView) view.findViewById(R.id.searchStockInfo);
                                 CharSequence name = card.getString("name"), price = card.getString("price"), availableFlag = card.getString("available_flag");
