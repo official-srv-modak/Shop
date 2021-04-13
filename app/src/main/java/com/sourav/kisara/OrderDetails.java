@@ -99,6 +99,7 @@ public class OrderDetails extends AppCompatActivity {
                             {
                                 Glide.with(OrderDetails.this)
                                         .load(imagePath)
+
                                         .into(imageView);
                             }
 

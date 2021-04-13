@@ -60,6 +60,7 @@ public class Feed extends RecyclerView.Adapter<Feed.FeedViewHolder> {
 
         Glide.with(context)
                 .load(imageUrl.get(position))
+
                 .override(holder.imageView.getWidth(), holder.imageView.getHeight())
                 //.override(Target.SIZE_ORIGINAL)
                 .timeout(60000)

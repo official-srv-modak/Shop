@@ -151,6 +151,7 @@ public class ProductDescription extends AppCompatActivity {
                             {
                                 Glide.with(ProductDescription.this)
                                         .load(imagePath)
+
                                         .into(imageView);
                             }
                         } catch (JSONException e) {
