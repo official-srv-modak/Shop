@@ -70,13 +70,14 @@ public class SearchActivity extends AppCompatActivity {
                 LinearLayout linearLayout1 = SearchActivity.this.findViewById(R.id.linearLayout1);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-                    if(!query.isEmpty())
+                    if(!query.isEmpty() && query.length()>=3)
                     {
                         LoadCard ld = new LoadCard();
                         ld.execute(MainActivity.searchUrl, query);
                     }
                     else
                     {
+                        queryTitle.setText(getResources().getText(R.string.search_msg));
                         linearLayout1.removeAllViews();
                     }
                 }
@@ -92,9 +93,7 @@ public class SearchActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 TextView queryTitle = findViewById(R.id.queryTitle);
                 if(searchTextBox.getText().toString().isEmpty())
-                    queryTitle.setText("Enter something");
-
-
+                    queryTitle.setText(getResources().getText(R.string.search_msg));
             }
         });
     }
@@ -191,7 +190,7 @@ public class SearchActivity extends AppCompatActivity {
                             }
                             else if(show.length() == 0)
                             {
-                                queryTitle.setText("Enter something");
+                                queryTitle.setText(getResources().getText(R.string.search_msg));
                             }
 
                         } catch (JSONException e) {

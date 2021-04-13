@@ -7,4 +7,5 @@
     <string name="expected_delivery_string">We will update when seller accepts the order.</string>
     <string name="payment_method_availability">Only cash on deliver available.</string>
     <string name="default_quantity">1 (restricted quantity to 1 per order)</string>
+    <string name="search_msg">Enter at least 3 characters</string>
 </resources>

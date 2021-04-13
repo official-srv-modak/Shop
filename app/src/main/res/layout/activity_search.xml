@@ -122,7 +122,7 @@
                 android:layout_margin="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter Something" />
+                android:text="@string/search_msg" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
