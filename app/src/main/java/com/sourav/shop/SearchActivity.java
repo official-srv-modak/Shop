@@ -154,8 +154,8 @@ public class SearchActivity extends AppCompatActivity {
                                 if(!album_art_path.isEmpty())
                                     Glide.with(SearchActivity.this).load(album_art_path).timeout(60000).into(imageView);
 
-                                TextView tv = (TextView) view.findViewById(R.id.showNameSearch), priceTv = (TextView) view.findViewById(R.id.price), stockInfoTv = (TextView) view.findViewById(R.id.searchStockInfo), descriptionTv = (TextView) view.findViewById(R.id.searchElementDesc);
-                                CharSequence name = card.getString("name"), price = card.getString("price"), availableFlag = card.getString("available_flag"), desc = card.getString("description");
+                                TextView tv = (TextView) view.findViewById(R.id.showNameSearch), priceTv = (TextView) view.findViewById(R.id.price), stockInfoTv = (TextView) view.findViewById(R.id.searchStockInfo), descriptionTv = (TextView) view.findViewById(R.id.searchElementDesc), sellerNameTv = (TextView) view.findViewById(R.id.searchSellerName);
+                                CharSequence name = card.getString("name"), price = card.getString("price"), availableFlag = card.getString("available_flag"), desc = card.getString("description"), sellerName = card.getString("seller_name");
                                 if(!name.toString().isEmpty())
                                     tv.setText(name);
 
@@ -167,6 +167,9 @@ public class SearchActivity extends AppCompatActivity {
 
                                 if(!desc.toString().isEmpty())
                                     descriptionTv.setText(desc.toString());
+
+                                if(!sellerName.toString().isEmpty())
+                                    sellerNameTv.setText(sellerName.toString());
 
 
                                 view.setOnClickListener(new View.OnClickListener() {
