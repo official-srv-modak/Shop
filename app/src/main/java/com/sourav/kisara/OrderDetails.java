@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
@@ -73,6 +74,14 @@ public class OrderDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        Button placeOrderBtn = findViewById(R.id.orderDetailsPlaceOrderBtn);
+        placeOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(OrderDetails.this, "App development still in progress, cannot place order", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     static JSONObject userInfo = null, productDt = null;
     static Boolean refreshFlag = false;
     SwipeRefreshLayout swipeRefreshLayout;
+    RecyclerView recyclerView;
 
     @SuppressLint("CheckResult")
     @Override
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshMain);
+        recyclerView = findViewById(R.id.pageScrollView);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -96,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
                 refreshFlag = true;
                 refreshData("Refreshing product list");
                 refreshFlag = false;
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.smoothScrollToPosition(0);
+                    }
+                });
             }
         });
     }

@@ -521,7 +521,7 @@
 
 
                                 <Button
-                                    android:id="@+id/buyBtn"
+                                    android:id="@+id/orderDetailsPlaceOrderBtn"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
