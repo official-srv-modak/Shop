@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -131,9 +132,9 @@ public class ProductDescription extends AppCompatActivity {
                             if(productData.has("available_flag"))
                                 MiscOperations.addStockFlagColorTextView(availableFlag, stockDetails);
                             if(productData.has("description"))
-                                description.setText(Html.fromHtml("<b>"+description.getText()+"</b><br><br>"+productData.getString("description")));
+                                description.setText(productData.getString("description"));
                             if(productData.has("origin_place") && productData.has("country_of_origin"))
-                                shippingFrom.setText(Html.fromHtml("<b>"+shippingFrom.getText()+"</b>"+productData.getString("origin_place")+", "+productData.getString("country_of_origin")));
+                                shippingFrom.setText(Html.fromHtml("<strong>"+shippingFrom.getText()+"</strong>"+productData.getString("origin_place")+", "+productData.getString("country_of_origin")));
                             if(productData.has("price"))
                                 price.setText(price.getText()+productData.getString("price"));
                             if(productData.has("delivery_fee"))
@@ -200,6 +201,8 @@ public class ProductDescription extends AppCompatActivity {
                                         TextView keyView = row.findViewById(R.id.key), valueView = row.findViewById(R.id.value);
                                         keyView.setText(keys.get(j).substring(0, 1).toUpperCase() + keys.get(j).substring(1));
                                         String val = productData1.getString(key);
+                                        valueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+                                        keyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
                                         if (!val.isEmpty())
                                         {
                                             val = val.substring(0, 1).toUpperCase() + val.substring(1);

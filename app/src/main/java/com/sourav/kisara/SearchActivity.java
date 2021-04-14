@@ -169,7 +169,7 @@ public class SearchActivity extends AppCompatActivity {
                                     descriptionTv.setText(desc.toString());
 
                                 if(!sellerName.toString().isEmpty())
-                                    sellerNameTv.setText(sellerName.toString());
+                                    sellerNameTv.setText(sellerName.toString()+getResources().getString(R.string.seller_phrase));
 
 
                                 view.setOnClickListener(new View.OnClickListener() {
