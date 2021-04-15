@@ -5,4 +5,4 @@ Demo of the app is presented below
 
 
 
-![Kisara app demo](demo/demo.gif)
+![Kisara app demo](demo/demo.gif width=100)
